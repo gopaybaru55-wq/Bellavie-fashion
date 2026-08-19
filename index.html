@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BELLAVIE — Women's Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-main:#fdfbf7;
+    --paper-2:#f4ece1;
+    --charcoal:#3a2e2b;
+    --gold:#d4af37;
+    --gold-dark:#b38f28;
+    --line:#eae2d6;
+    --line-strong:#d2c5b3;
+    --sage:#6a7b5d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg-main);
+    color:var(--charcoal);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.55;
+  }
+  h1,h2,h3, .display{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(253,251,247,0.95);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+  }
+  .logo{
+    font-family:'Playfair Display', serif;
+    font-size:26px; font-weight:700; letter-spacing:0.04em;
+    color:var(--charcoal);
+  }
+  .logo span{ color:var(--gold); }
+  nav.mainnav{ display:flex; gap:32px; }
+  nav.mainnav a{
+    font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--charcoal); text-decoration:none; opacity:0.8;
+    padding-bottom:3px; border-bottom:1px solid transparent;
+    transition:all .15s;
+  }
+  nav.mainnav a:hover{ opacity:1; border-color:var(--gold); color:var(--gold-dark); }
+  .head-actions{ display:flex; align-items:center; gap:18px; }
+  .cart-btn{
+    display:flex; align-items:center; gap:8px;
+    background:none; border:1px solid var(--charcoal); border-radius:999px;
+    padding:9px 16px 9px 14px; font-size:13px; letter-spacing:0.03em;
+  }
+  .cart-btn:hover{ background:var(--charcoal); color:var(--bg-main); }
+  .cart-count{
+    background:var(--gold); color:#fff;
+    border-radius:999px; font-size:11px; min-width:18px; height:18px;
+    display:flex; align-items:center; justify-content:center; padding:0 4px;
+    font-family:'Space Mono', monospace; font-weight:700;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:64px 0 56px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+    background: linear-gradient(180deg, rgba(244,236,225,0.4) 0%, rgba(253,251,247,1) 100%);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-dark);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold-dark); display:inline-block; }
+  .hero h1{
+    font-size:52px; line-height:1.08; margin-bottom:20px; color:var(--charcoal);
+  }
+  .hero h1 em{ font-style:italic; color:var(--gold-dark); }
+  .hero p.lede{
+    font-size:16px; max-width:420px; color:#554a46; margin-bottom:30px;
+  }
+  .hero-ctas{ display:flex; gap:14px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:999px; font-size:14px; letter-spacing:0.02em;
+    border:1px solid var(--charcoal); text-decoration:none; background:none; color:var(--charcoal);
+    transition:all .15s;
+  }
+  .btn-solid{ background:var(--charcoal); color:#fff; }
+  .btn-solid:hover{ background:var(--gold-dark); border-color:var(--gold-dark); }
+  .btn:not(.btn-solid):hover{ background:var(--charcoal); color:#fff; }
+
+  .hero-art{ position:relative; }
+  .swatch-tag{
+    position:absolute; top:-14px; right:14px;
+    background:var(--gold-dark); color:#fff;
+    font-family:'Space Mono', monospace; font-size:11px;
+    padding:6px 12px; border-radius:4px; transform:rotate(4deg);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- stats strip ---------- */
+  .stripe{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+    background:#fff;
+  }
+  .stripe .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .stripe-item{
+    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.05em;
+    color:#665c56; display:flex; align-items:center; gap:8px;
+  }
+  .stripe-item b{ color:var(--charcoal); font-weight:700; }
+
+  /* ---------- collection ---------- */
+  .collection{ padding:60px 0 20px; }
+  .coll-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:30px; gap:20px; flex-wrap:wrap;
+  }
+  .coll-head h2{ font-size:32px; color:var(--charcoal); }
+  .coll-head p{ font-size:14px; color:#6b6255; max-width:380px; }
+
+  .filters{
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:38px;
+  }
+  .filter-chip{
+    border:1px solid var(--line-strong); background:var(--bg-main);
+    padding:9px 18px; border-radius:999px; font-size:13px; letter-spacing:0.02em;
+    color:#544c40; transition:all .15s;
+  }
+  .filter-chip:hover{ border-color:var(--charcoal); color:var(--charcoal); }
+  .filter-chip.active{ background:var(--charcoal); border-color:var(--charcoal); color:#fff; }
+
+  .grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px 24px;
+    padding-bottom:70px;
+  }
+  .card{
+    border:1px solid var(--line);
+    border-radius:14px; overflow:hidden; background:#fff;
+    display:flex; flex-direction:column;
+    transition:border-color .2s, transform .2s, box-shadow .2s;
+    position:relative;
+  }
+  .card:hover{ border-color:var(--line-strong); transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.04); }
+  .card-media{
+    aspect-ratio:4/5; background:var(--paper-2);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; border-bottom:1px solid var(--line);
+  }
+  .card-media svg{ width:58%; height:58%; }
+  .badge-new{
+    position:absolute; top:12px; left:12px;
+    font-family:'Space Mono', monospace; font-size:10px; letter-spacing:0.06em;
+    background:#fff; border:1px solid var(--gold); color:var(--gold-dark); border-radius:999px;
+    padding:4px 10px; text-transform:uppercase; font-weight:700;
+  }
+  .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-cat{ font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-dark); }
+  .card-name{ font-family:'Playfair Display', serif; font-size:18px; font-weight:600; line-height:1.25; }
+  .card-price{ font-family:'Space Mono', monospace; font-size:14px; margin-top:2px; }
+  .card-foot{ margin-top:auto; display:flex; gap:8px; align-items:center; padding-top:10px; }
+  select.size-select{
+    flex:1; border:1px solid var(--line-strong); background:#fff;
+    border-radius:8px; padding:9px 8px; font-size:12.5px; color:var(--charcoal);
+    font-family:'Work Sans', sans-serif;
+  }
+  .add-btn{
+    background:var(--charcoal); color:#fff; border:none; border-radius:8px;
+    padding:9px 14px; font-size:12.5px; letter-spacing:0.02em; white-space:nowrap;
+    transition:background .15s;
+  }
+  .add-btn:hover{ background:var(--gold-dark); }
+  .add-btn.added{ background:var(--sage); }
+
+  /* ---------- values ---------- */
+  .values{
+    background:var(--charcoal); color:#fff;
+    padding:56px 0;
+  }
+  .values .wrap{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:34px;
+  }
+  .value-item .num{
+    font-family:'Space Mono', monospace; font-size:12px; color:var(--gold);
+    margin-bottom:10px; letter-spacing:0.08em;
+  }
+  .value-item h3{ font-size:19px; margin-bottom:8px; font-weight:500; font-family:'Playfair Display', serif; }
+  .value-item p{ font-size:13.5px; color:#d2c8be; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:48px 0 36px; background:#fff; border-top:1px solid var(--line); }
+  .foot-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:28px; }
+  .foot-brand .logo{ margin-bottom:10px; }
+  .foot-brand p{ font-size:13px; color:#6b6255; max-width:280px; }
+  .foot-cols{ display:flex; gap:60px; flex-wrap:wrap; }
+  .foot-col h4{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; color:#8a8172; }
+  .foot-col a{ display:block; font-size:13.5px; margin-bottom:9px; text-decoration:none; color:var(--charcoal); opacity:0.85; }
+  .foot-col a:hover{ opacity:1; color:var(--gold-dark); }
+  .foot-bottom{
+    border-top:1px solid var(--line); padding-top:20px;
+    font-size:12px; color:#8a8172; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:'Space Mono', monospace;
+  }
+
+  /* ---------- Floating Widget AI Chatbot ---------- */
+  .chat-widget-btn{
+    position:fixed; bottom:28px; right:28px; z-index:90;
+    background:var(--charcoal); color:#fff; border:1px solid var(--gold);
+    padding:13px 22px; border-radius:999px; font-size:13.5px; font-weight:500;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15); display:flex; align-items:center; gap:8px;
+    transition:all .2s;
+  }
+  .chat-widget-btn:hover{ background:var(--gold-dark); border-color:var(--gold-dark); transform:scale(1.03); }
+  
+  .chat-box{
+    position:fixed; bottom:92px; right:28px; width:360px; max-width:90vw; height:490px;
+    background:#fff; border-radius:16px; border:1px solid var(--line-strong);
+    box-shadow:0 12px 35px rgba(0,0,0,0.15); z-index:95;
+    display:none; flex-direction:column; overflow:hidden;
+  }
+  .chat-box.show{ display:flex; }
+  .chat-head{
+    background:var(--charcoal); color:#fff; padding:16px 20px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .chat-head-title{ font-family:'Playfair Display', serif; font-size:16px; }
+  .chat-head-sub{ font-size:11px; color:var(--gold); display:block; font-family:'Space Mono', monospace; }
+  .chat-body{
+    flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;
+    background:var(--bg-main); font-size:13px;
+  }
+  .msg-bubble{ max-width:82%; padding:10px 14px; border-radius:12px; line-height:1.45; }
+  .msg-bubble.bot{ background:#fff; border:1px solid var(--line); color:var(--charcoal); align-self:flex-start; border-bottom-left-radius:2px; }
+  .msg-bubble.user{ background:var(--charcoal); color:#fff; align-self:flex-end; border-bottom-right-radius:2px; }
+  .chat-foot{ padding:12px; border-top:1px solid var(--line); display:flex; gap:8px; background:#fff; }
+  .chat-foot input{
+    flex:1; border:1px solid var(--line-strong); border-radius:20px; padding:8px 14px;
+    font-size:13px; outline:none; font-family:inherit;
+  }
+  .chat-foot button{
+    background:var(--charcoal); color:#fff; border:none; padding:8px 16px; border-radius:20px;
+    font-size:12.5px; transition:background .15s;
+  }
+  .chat-foot button:hover{ background:var(--gold-dark); }
+
+  /* ---------- cart drawer ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(38,30,27,0.45);
+    opacity:0; pointer-events:none; transition:opacity .25s; z-index:60;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:420px; max-width:92vw;
+    background:var(--bg-main); z-index:70; box-shadow:-8px 0 30px rgba(0,0,0,0.12);
+    transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column;
+  }
+  .drawer.show{ transform:translateX(0); }
+  .drawer-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 24px; border-bottom:1px solid var(--line);
+  }
+  .drawer-head h3{ font-size:20px; font-family:'Playfair Display', serif; }
+  .icon-btn{ background:none; border:none; font-size:20px; line-height:1; color:var(--charcoal); }
+  .drawer-items{ flex:1; overflow-y:auto; padding:10px 24px; }
+  .cart-row{
+    display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .cart-row-media{
+    width:64px; height:78px; background:var(--paper-2); border-radius:8px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .cart-row-media svg{ width:60%; height:60%; }
+  .cart-row-info{ flex:1; display:flex; flex-direction:column; gap:4px; }
+  .cart-row-info .name{ font-family:'Playfair Display', serif; font-size:15px; }
+  .cart-row-info .meta{ font-size:12px; color:#7a7164; }
+  .cart-row-info .price{ font-family:'Space Mono', monospace; font-size:13px; margin-top:2px; }
+  .qty-ctrl{ display:flex; align-items:center; gap:10px; margin-top:6px; }
+  .qty-ctrl button{
+    width:22px; height:22px; border:1px solid var(--line-strong); background:#fff;
+    border-radius:5px; font-size:13px; display:flex; align-items:center; justify-content:center;
+  }
+  .qty-ctrl span{ font-family:'Space Mono', monospace; font-size:13px; min-width:14px; text-align:center; }
+  .remove-link{ font-size:11.5px; color:var(--gold-dark); text-decoration:underline; background:none; border:none; margin-top:2px; align-self:flex-start; }
+  .empty-cart{ text-align:center; padding:60px 20px; color:#8a8172; font-size:14px; }
+
+  .drawer-foot{ border-top:1px solid var(--line); padding:20px 24px 26px; background:#fff; }
+  .subtotal-row{ display:flex; justify-content:space-between; font-size:15px; margin-bottom:14px; }
+  .subtotal-row .amt{ font-family:'Space Mono', monospace; font-weight:700; }
+  .checkout-btn{
+    width:100%; padding:14px; border-radius:10px; background:var(--charcoal); color:#fff;
+    border:none; font-size:14.5px; letter-spacing:0.02em; transition:background .15s;
+  }
+  .checkout-btn:hover{ background:var(--gold-dark); }
+  .checkout-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  /* ---------- checkout modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(38,30,27,0.5); z-index:80;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal{
+    background:var(--bg-main); border-radius:16px; width:480px; max-width:100%;
+    max-height:88vh; overflow-y:auto; padding:32px; position:relative;
+  }
+  .modal h3{ font-size:24px; margin-bottom:6px; font-family:'Playfair Display', serif; }
+  .modal p.sub{ font-size:13.5px; color:#7a7164; margin-bottom:24px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12.5px; letter-spacing:0.03em; margin-bottom:6px; color:#544c40; }
+  .field input, .field textarea, .field select{
+    width:100%; border:1px solid var(--line-strong); border-radius:9px; padding:11px 13px;
+    font-size:14px; font-family:'Work Sans', sans-serif; background:#fff; color:var(--charcoal);
+  }
+  .field textarea{ resize:vertical; min-height:64px; }
+  .field-error{ font-size:11.5px; color:var(--gold-dark); margin-top:4px; display:none; }
+  .field.error input, .field.error textarea, .field.error select{ border-color:var(--gold-dark); }
+  .field.error .field-error{ display:block; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .pay-options{ display:flex; gap:10px; margin-bottom:20px; }
+  .pay-opt{
+    flex:1; border:1px solid var(--line-strong); border-radius:9px; padding:11px; text-align:center;
+    font-size:12.5px; cursor:pointer; background:#fff;
+  }
+  .pay-opt.active{ border-color:var(--charcoal); background:var(--paper-2); font-weight:500; }
+  .modal-close{ position:absolute; top:18px; right:18px; }
+
+  .success-view{ text-align:center; padding:10px 0 6px; }
+  .success-view .check{
+    width:56px; height:56px; border-radius:50%; background:var(--sage); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 18px;
+  }
+  .success-view h3{ margin-bottom:10px; }
+  .success-view p{ font-size:14px; color:#6b6255; margin-bottom:4px; }
+  .order-code{ font-family:'Space Mono', monospace; background:var(--paper-2); border-radius:8px; padding:10px; margin:18px 0; font-size:15px; letter-spacing:0.04em; }
+
+  @media(max-width:880px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
+    .hero h1{ font-size:38px; }
+    nav.mainnav{ display:none; }
+    .grid{ grid-template-columns:repeat(2,1fr); }
+    .values .wrap{ grid-template-columns:1fr; }
+    .foot-grid{ flex-direction:column; }
+  }
+  @media(max-width:520px){
+    .wrap{ padding:0 18px; }
+    .grid{ grid-template-columns:1fr; }
+    .drawer{ width:100%; }
+    .chat-box{ right:15px; bottom:80px; width:calc(100vw - 30px); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap headbar">
+    <div class="logo">BELLAVIE<span>.</span></div>
+    <nav class="mainnav">
+      <a href="#koleksi">New Arrivals</a>
+      <a href="#koleksi">Dress</a>
+      <a href="#koleksi">Atasan</a>
+      <a href="#koleksi">Bawahan</a>
+    </nav>
+    <div class="head-actions">
+      <button class="cart-btn" id="cartOpenBtn">
+        Keranjang <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Exquisite Collection — 2026</div>
+      <h1>Elegance in <em>every</em> detail of your dress.</h1>
+      <p class="lede">Koleksi pakaian wanita eksklusif dengan pilihan bahan premium, potongan modern, dan kenyamanan istimewa untuk gaya hidup elegan Anda.</p>
+      <div class="hero-ctas">
+        <a href="#koleksi" class="btn btn-solid">Jelajahi Koleksi</a>
+        <a href="#tentang" class="btn">Tentang BELLAVIE</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <span class="swatch-tag">Silk & Rayon Premium</span>
+      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="192" height="252" rx="10" fill="#f4ece1" stroke="#eae2d6"/>
+        <g stroke="#3a2e2b" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M100 40 L78 58 L70 52 L58 72 L72 84 L72 220 L128 220 L128 84 L142 72 L130 52 L122 58 Z"/>
+          <path d="M78 58 C 88 70, 112 70, 122 58" />
+          <line x1="82" y1="100" x2="118" y2="100" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <line x1="82" y1="150" x2="118" y2="150" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="4 4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="stripe">
+  <div class="wrap">
+    <div class="stripe-item">✨ <b>Garansi</b> Tukar Size 3 Hari</div>
+    <div class="stripe-item">↺ <b>Bahan</b> Silk & Katun Premium</div>
+    <div class="stripe-item">🚚 <b>Pengiriman</b> Instant & Reguler</div>
+    <div class="stripe-item">💬 <b>Fashion Advisor</b> Online 24/7</div>
+  </div>
+</div>
+
+<section class="collection" id="koleksi">
+  <div class="wrap">
+    <div class="coll-head">
+      <div>
+        <h2>Koleksi BELLAVIE</h2>
+        <p>Setiap potongan dirancang khusus untuk memancarkan keanggunan. Pilih ukuran dan pesan sekarang.</p>
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="values" id="tentang">
+  <div class="wrap">
+    <div class="value-item">
+      <div class="num">01</div>
+      <h3>Material Premium</h3>
+      <p>Menggunakan Silk, Linen, dan Rayon Uniqlo pilihan yang sejuk dan memberikan drape indah pada tubuh.</p>
+    </div>
+    <div class="value-item">
+      <div class="num">02</div>
+      <h3>Limited Design</h3>
+      <p>Setiap seri diproduksi secara terbatas untuk menjaga keeksklusifan gaya busana Anda.</p>
+    </div>
+    <div class="value-item">
+      <div class="num">03</div>
+      <h3>Presisi Ukuran</h3>
+      <p>Size chart yang dirancang cermat untuk memastikan kenyamanan sempurna dari Size S hingga XL.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="kontak">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">BELLAVIE<span>.</span></div>
+        <p>Butik busana wanita modern dengan desain elegan dan bahan kelas atas. Dikirim ke seluruh Indonesia.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Belanja</h4>
+          <a href="#koleksi">Semua Produk</a>
+          <a href="#koleksi">Dress</a>
+          <a href="#koleksi">Atasan</a>
+          <a href="#koleksi">Bawahan</a>
+        </div>
+        <div class="foot-col">
+          <h4>Bantuan</h4>
+          <a href="#">Panduan Ukuran</a>
+          <a href="#">Kebijakan Retur</a>
+          <a href="#">Lacak Pesanan</a>
+        </div>
+        <div class="foot-col">
+          <h4>Hubungi</h4>
+          <a href="mailto:support@bellavie.co.id">support@bellavie.co.id</a>
+          <a href="#">Instagram @bellavie.id</a>
+          <a href="#">WhatsApp Official</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BELLAVIE Women's Fashion</span>
+      <span>Luxury & Elegance</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating AI Chatbot Widget -->
+<button class="chat-widget-btn" id="chatWidgetBtn">
+  💬 Chat CS BELLAVIE
+</button>
+
+<div class="chat-box" id="chatBox">
+  <div class="chat-head">
+    <div>
+      <div class="chat-head-title">BELLAVIE AI Advisor</div>
+      <span class="chat-head-sub">● Aira Online</span>
+    </div>
+    <button class="icon-btn" id="chatCloseBtn" style="color:#fff;">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg-bubble bot">
+      Selamat datang di BELLAVIE Women's Fashion! ✨ Ada yang bisa Aira bantu mengenai rekomendasi ukuran, bahan, atau koleksi produk hari ini, Sis?
+    </div>
+  </div>
+  <form class="chat-foot" id="chatForm">
+    <input type="text" id="chatInput" placeholder="Tanya tentang stok, size chart..." required />
+    <button type="submit">Kirim</button>
+  </form>
+</div>
+
+<!-- Cart Drawer -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Keranjang Belanja</h3>
+    <button class="icon-btn" id="drawerCloseBtn">✕</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="subtotal-row">
+      <span>Subtotal</span>
+      <span class="amt" id="subtotalAmt">Rp 0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" disabled>Checkout Pesanan</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<script>
+/* ---------- Data SVG Icons ---------- */
+const ICONS = {
+  dress: `<path d="M100 30 L84 46 L76 40 L64 62 L78 74 L78 210 L122 210 L122 74 L136 62 L124 40 L116 46 Z"/><path d="M84 46 C 92 56, 108 56, 116 46"/>`,
+  atasan: `<path d="M100 34 L70 50 L60 46 L44 78 L64 92 L64 100 L64 190 L136 190 L136 100 L136 92 L156 78 L140 46 L130 50 Z"/><path d="M84 44 C 90 54, 110 54, 116 44"/>`,
+  bawahan: `<path d="M78 40 L122 40 L122 60 L150 190 L50 190 L78 60 Z"/><line x1="78" y1="60" x2="122" y2="60"/>`,
+  outer: `<path d="M100 32 L76 50 L60 46 L38 82 L58 96 L64 88 L64 195 L90 195 L90 120 L110 120 L110 195 L136 195 L136 88 L142 96 L162 82 L140 46 L124 50 Z"/>`
+};
+function iconSvg(kind, stroke){
+  return `<svg viewBox="0 0 200 220" fill="none" stroke="${stroke}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${ICONS[kind] || ICONS.dress}</svg>`;
+}
+
+const CATS = [
+  {id:'semua', label:'Semua'},
+  {id:'dress', label:'Dress'},
+  {id:'atasan', label:'Atasan'},
+  {id:'bawahan', label:'Bawahan'},
+  {id:'outer', label:'Outer'}
+];
+
+const PRODUCTS = [
+  {id:'p1', name:'Bella Silk Evening Dress', cat:'dress', icon:'dress', price:489000, sizes:['S','M','L','XL'], isNew:true},
+  {id:'p2', name:'Aira Wrap Linen Dress', cat:'dress', icon:'dress', price:379000, sizes:['S','M','L']},
+  {id:'p3', name:'Claire Midi Satin Dress', cat:'dress', icon:'dress', price:429000, sizes:['S','M','L','XL']},
+  {id:'p4', name:'Vania Blouse Silk', cat:'atasan', icon:'atasan', price:289000, sizes:['S','M','L','XL'], isNew:true},
+  {id:'p5', name:'Nara Puff Shirt Rayon', cat:'atasan', icon:'atasan', price:249000, sizes:['S','M','L']},
+  {id:'p6', name:'High-Waist Elegance Pants', cat:'bawahan', icon:'bawahan', price:299000, sizes:['S','M','L','XL']},
+  {id:'p7', name:'Alira Pleated Skirt', cat:'bawahan', icon:'bawahan', price:279000, sizes:['S','M','L']},
+  {id:'p8', name:'Bianca Luxury Outer', cat:'outer', icon:'outer', price:359000, sizes:['S','M','L','XL'], isNew:true}
+];
+
+/* ---------- State ---------- */
+let activeCat = 'semua';
+let cart = [];
+
+function rupiah(n){
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+/* ---------- Render Filters & Products ---------- */
+const filtersEl = document.getElementById('filters');
+CATS.forEach(c=>{
+  const btn = document.createElement('button');
+  btn.className = 'filter-chip' + (c.id===activeCat ? ' active':'');
+  btn.textContent = c.label;
+  btn.addEventListener('click', ()=>{
+    activeCat = c.id;
+    document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts();
+  });
+  filtersEl.appendChild(btn);
+});
+
+const gridEl = document.getElementById('productGrid');
+function renderProducts(){
+  gridEl.innerHTML = '';
+  const list = activeCat==='semua' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
+  list.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-media">
+        ${p.isNew ? '<span class="badge-new">New</span>' : ''}
+        ${iconSvg(p.icon, '#3a2e2b')}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-price">${rupiah(p.price)}</div>
+        <div class="card-foot">
+          <select class="size-select" data-id="${p.id}">
+            ${p.sizes.map(s=>`<option value="${s}">Size ${s}</option>`).join('')}
+          </select>
+          <button class="add-btn" data-id="${p.id}">+ Keranjang</button>
+        </div>
+      </div>
+    `;
+    gridEl.appendChild(card);
+  });
+
+  gridEl.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.dataset.id;
+      const sizeSelect = gridEl.querySelector(`.size-select[data-id="${id}"]`);
+      addToCart(id, sizeSelect.value);
+      btn.textContent = 'Ditambahkan ✓';
+      btn.classList.add('added');
+      setTimeout(()=>{ btn.textContent = '+ Keranjang'; btn.classList.remove('added'); }, 1100);
+    });
+  });
+}
+renderProducts();
+
+/* ---------- Cart Logic ---------- */
+function addToCart(id, size){
+  const product = PRODUCTS.find(p=>p.id===id);
+  const existing = cart.find(item=>item.id===id && item.size===size);
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({id, size, qty:1, name:product.name, price:product.price, icon:product.icon});
+  }
+  renderCart();
+}
+function changeQty(id, size, delta){
+  const item = cart.find(i=>i.id===id && i.size===size);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){
+    cart = cart.filter(i=>!(i.id===id && i.size===size));
+  }
+  renderCart();
+}
+function removeFromCart(id, size){
+  cart = cart.filter(i=>!(i.id===id && i.size===size));
+  renderCart();
+}
+function cartTotal(){ return cart.reduce((sum,i)=>sum + i.price*i.qty, 0); }
+function cartCount(){ return cart.reduce((sum,i)=>sum + i.qty, 0); }
+
+const drawerItemsEl = document.getElementById('drawerItems');
+const cartCountEl = document.getElementById('cartCount');
+const subtotalAmtEl = document.getElementById('subtotalAmt');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+function renderCart(){
+  cartCountEl.textContent = cartCount();
+  subtotalAmtEl.textContent = rupiah(cartTotal());
+  checkoutBtn.disabled = cart.length === 0;
+
+  if(cart.length === 0){
+    drawerItemsEl.innerHTML = `<div class="empty-cart">Keranjang belanja Anda masih kosong.</div>`;
+    return;
+  }
+
+  drawerItemsEl.innerHTML = cart.map(item=>`
+    <div class="cart-row">
+      <div class="cart-row-media">${iconSvg(item.icon, '#d4af37')}</div>
+      <div class="cart-row-info">
+        <div class="name">${item.name}</div>
+        <div class="meta">Ukuran: ${item.size}</div>
+        <div class="price">${rupiah(item.price * item.qty)}</div>
+        <div class="qty-ctrl">
+          <button data-act="dec" data-id="${item.id}" data-size="${item.size}">−</button>
+          <span>${item.qty}</span>
+          <button data-act="inc" data-id="${item.id}" data-size="${item.size}">+</button>
+        </div>
+        <button class="remove-link" data-act="remove" data-id="${item.id}" data-size="${item.size}">Hapus</button>
+      </div>
+    </div>
+  `).join('');
+
+  drawerItemsEl.querySelectorAll('button[data-act]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const {act, id, size} = btn.dataset;
+      if(act==='inc') changeQty(id, size, 1);
+      if(act==='dec') changeQty(id, size, -1);
+      if(act==='remove') removeFromCart(id, size);
+    });
+  });
+}
+renderCart();
+
+/* ---------- Drawer Controls ---------- */
+const overlay = document.getElementById('overlay');
+const drawer = document.getElementById('drawer');
+function openDrawer(){ overlay.classList.add('show'); drawer.classList.add('show'); }
+function closeDrawer(){ overlay.classList.remove('show'); drawer.classList.remove('show'); }
+document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
+document.getElementById('drawerCloseBtn').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', ()=>{ closeDrawer(); closeModal(); });
+
+/* ---------- Floating AI Chatbot Script ---------- */
+const chatWidgetBtn = document.getElementById('chatWidgetBtn');
+const chatBox = document.getElementById('chatBox');
+const chatCloseBtn = document.getElementById('chatCloseBtn');
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatBody = document.getElementById('chatBody');
+
+chatWidgetBtn.addEventListener('click', ()=> chatBox.classList.toggle('show'));
+chatCloseBtn.addEventListener('click', ()=> chatBox.classList.remove('show'));
+
+chatForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const text = chatInput.value.trim();
+  if(!text) return;
+
+  // Render Pesan User
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg-bubble user';
+  userMsg.textContent = text;
+  chatBody.appendChild(userMsg);
+  chatInput.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Simulasi Respon AI (Aira)
+  setTimeout(()=>{
+    let reply = "Terima kasih sudah menghubungi BELLAVIE, Sis! Anggota tim CS kami akan membantu Anda sebentar lagi.";
+    const lower = text.toLowerCase();
+
+    if(lower.includes("size") || lower.includes("ukuran") || lower.includes("bb")){
+      reply = "Untuk ukuran BELLAVIE:\n- Size S: BB 42-48 kg (LD 88cm)\n- Size M: BB 49-56 kg (LD 94cm)\n- Size L: BB 57-65 kg (LD 100cm)\n- Size XL: BB 66-75 kg (LD 108cm)\nBoleh infokan BB & TB Sis agar Aira berikan rekomendasi tepat?";
+    } else if(lower.includes("retur") || lower.includes("tukar")){
+      reply = "BELLAVIE menyediakan garansi tukar size hingga 3 hari setelah barang diterima, dengan syarat menyertakan video unboxing ya, Sis ✨";
+    } else if(lower.includes("stok") || lower.includes("ready")){
+      reply = "Semua koleksi yang ada di katalog halaman utama dalam status ready stock ya, Sis. Silakan dipesan sebelum kehabisan!";
+    }
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'msg-bubble bot';
+    botMsg.innerText = reply;
+    chatBody.appendChild(botMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 800);
+});
+
+/* ---------- Checkout Modal Logic ---------- */
+const modalOverlay = document.getElementById('modalOverlay');
+const modalBox = document.getElementById('modalBox');
+
+function checkoutFormHtml(){
+  return `
+    <button class="icon-btn modal-close" id="modalCloseBtn">✕</button>
+    <h3>Checkout Pesanan</h3>
+    <p class="sub">Lengkapi detail pengiriman Anda untuk menyelesaikan pesanan.</p>
+    <form id="checkoutForm" novalidate>
+      <div class="field" id="f-name">
+        <label>Nama Penerima</label>
+        <input type="text" id="in-name" placeholder="Nama lengkap">
+        <div class="field-error">Nama wajib diisi.</div>
+      </div>
+      <div class="row2">
+        <div class="field" id="f-phone">
+          <label>No. WhatsApp</label>
+          <input type="tel" id="in-phone" placeholder="08xxxxxxxxxx">
+          <div class="field-error">Nomor WA wajib diisi.</div>
+        </div>
+        <div class="field" id="f-city">
+          <label>Kota</label>
+          <input type="text" id="in-city" placeholder="Mis. Jakarta Selatan">
+          <div class="field-error">Kota wajib diisi.</div>
+        </div>
+      </div>
+      <div class="field" id="f-address">
+        <label>Alamat Lengkap</label>
+        <textarea id="in-address" placeholder="Jalan, No. Rumah, Kecamatan, Kode Pos"></textarea>
+        <div class="field-error">Alamat pengiriman wajib diisi.</div>
+      </div>
+      <div class="subtotal-row">
+        <span>Total Tagihan</span>
+        <span class="amt">${rupiah(cartTotal())}</span>
+      </div>
+      <button type="submit" class="checkout-btn">Konfirmasi Pesanan</button>
+    </form>
+  `;
+}
+
+function openCheckout(){
+  if(cart.length === 0) return;
+  modalBox.innerHTML = checkoutFormHtml();
+  modalOverlay.classList.add('show');
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
+}
+function closeModal(){ modalOverlay.classList.remove('show'); }
+
+function handleCheckoutSubmit(e){
+  e.preventDefault();
+  const fields = [
+    {id:'name', el:'in-name'},
+    {id:'phone', el:'in-phone'},
+    {id:'city', el:'in-city'},
+    {id:'address', el:'in-address'},
+  ];
+  let valid = true;
+  fields.forEach(f=>{
+    const wrap = document.getElementById('f-'+f.id);
+    const input = document.getElementById(f.el);
+    if(!input.value.trim()){
+      wrap.classList.add('error');
+      valid = false;
+    } else {
+      wrap.classList.remove('error');
+    }
+  });
+  if(!valid) return;
+
+  const orderCode = 'BV-' + Math.random().toString(36).slice(2,8).toUpperCase();
+  modalBox.innerHTML = `
+    <button class="icon-btn modal-close" onclick="closeModal()">✕</button>
+    <div class="success-view">
+      <div class="check">✓</div>
+      <h3>Pesanan Diterima</h3>
+      <p>Terima kasih telah berbelanja di BELLAVIE!</p>
+      <div class="order-code">${orderCode}</div>
+      <p>Tim kami akan menghubungi WhatsApp Anda untuk konfirmasi pembayaran & pengiriman.</p>
+      <button class="btn btn-solid" onclick="finishOrder()" style="margin-top:20px; width:100%; justify-content:center;">Selesai</button>
+    </div>
+  `;
+}
+
+function finishOrder(){
+  closeModal();
+  closeDrawer();
+  cart = [];
+  renderCart();
+}
+
+checkoutBtn.addEventListener('click', openCheckout);
+</script>
+</body>
+</html>
