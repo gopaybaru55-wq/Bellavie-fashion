@@ -75,13 +75,21 @@
     font-family:'Space Mono', monospace; font-weight:700;
   }
 
-  /* ---------- hero ---------- */
-  .hero{
-    padding:64px 0 56px;
-    border-bottom:1px solid var(--line);
+  /* ---------- Hero Banner Slider ---------- */
+  .hero-slider-section{
     position:relative;
-    overflow:hidden;
     background: linear-gradient(180deg, rgba(244,236,225,0.4) 0%, rgba(253,251,247,1) 100%);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .slider-container{
+    display:flex;
+    transition:transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width:100%;
+  }
+  .slide{
+    min-width:100%;
+    padding:64px 0 56px;
   }
   .hero-grid{
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
@@ -92,11 +100,11 @@
     display:flex; align-items:center; gap:10px; margin-bottom:18px;
   }
   .eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold-dark); display:inline-block; }
-  .hero h1{
+  .slide h1{
     font-size:52px; line-height:1.08; margin-bottom:20px; color:var(--charcoal);
   }
-  .hero h1 em{ font-style:italic; color:var(--gold-dark); }
-  .hero p.lede{
+  .slide h1 em{ font-style:italic; color:var(--gold-dark); }
+  .slide p.lede{
     font-size:16px; max-width:420px; color:#554a46; margin-bottom:30px;
   }
   .hero-ctas{ display:flex; gap:14px; }
@@ -111,13 +119,39 @@
   .btn:not(.btn-solid):hover{ background:var(--charcoal); color:#fff; }
 
   .hero-art{ position:relative; }
+  .hero-art img{
+    width:100%; height:340px; object-fit:cover; border-radius:12px;
+    border:1px solid var(--line);
+  }
   .swatch-tag{
     position:absolute; top:-14px; right:14px;
     background:var(--gold-dark); color:#fff;
     font-family:'Space Mono', monospace; font-size:11px;
     padding:6px 12px; border-radius:4px; transform:rotate(4deg);
-    letter-spacing:0.04em;
+    letter-spacing:0.04em; z-index:2;
   }
+
+  /* Slider Controls */
+  .slider-btn{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(255,255,255,0.85); border:1px solid var(--line-strong);
+    color:var(--charcoal); font-size:18px; display:flex; align-items:center;
+    justify-content:center; z-index:10; cursor:pointer; transition:all .2s;
+  }
+  .slider-btn:hover{ background:var(--charcoal); color:#fff; }
+  .slider-btn.prev{ left:20px; }
+  .slider-btn.next{ right:20px; }
+
+  .slider-dots{
+    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; z-index:10;
+  }
+  .dot{
+    width:10px; height:10px; border-radius:50%; background:var(--line-strong);
+    cursor:pointer; transition:all .2s;
+  }
+  .dot.active{ background:var(--gold-dark); width:28px; border-radius:10px; }
 
   /* ---------- stats strip ---------- */
   .stripe{
@@ -166,18 +200,34 @@
     position:relative;
   }
   .card:hover{ border-color:var(--line-strong); transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.04); }
+  
+  /* Product Card Image Gallery */
   .card-media{
     aspect-ratio:4/5; background:var(--paper-2);
-    display:flex; align-items:center; justify-content:center;
     position:relative; border-bottom:1px solid var(--line);
+    overflow:hidden;
   }
-  .card-media svg{ width:58%; height:58%; }
+  .card-media img.main-img{
+    width:100%; height:100%; object-fit:cover; transition:src 0.2s;
+  }
   .badge-new{
     position:absolute; top:12px; left:12px;
     font-family:'Space Mono', monospace; font-size:10px; letter-spacing:0.06em;
     background:#fff; border:1px solid var(--gold); color:var(--gold-dark); border-radius:999px;
-    padding:4px 10px; text-transform:uppercase; font-weight:700;
+    padding:4px 10px; text-transform:uppercase; font-weight:700; z-index:2;
   }
+  .card-thumbs{
+    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+    display:flex; gap:6px; background:rgba(255,255,255,0.85);
+    padding:4px 8px; border-radius:20px; backdrop-filter:blur(4px);
+  }
+  .thumb-item{
+    width:24px; height:24px; border-radius:50%; overflow:hidden;
+    border:1px solid var(--line-strong); cursor:pointer; opacity:0.7; transition:all .15s;
+  }
+  .thumb-item.active, .thumb-item:hover{ opacity:1; border-color:var(--gold-dark); transform:scale(1.1); }
+  .thumb-item img{ width:100%; height:100%; object-fit:cover; }
+
   .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
   .card-cat{ font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-dark); }
   .card-name{ font-family:'Playfair Display', serif; font-size:18px; font-weight:600; line-height:1.25; }
@@ -291,9 +341,9 @@
   }
   .cart-row-media{
     width:64px; height:78px; background:var(--paper-2); border-radius:8px; border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    overflow:hidden; flex-shrink:0;
   }
-  .cart-row-media svg{ width:60%; height:60%; }
+  .cart-row-media img{ width:100%; height:100%; object-fit:cover; }
   .cart-row-info{ flex:1; display:flex; flex-direction:column; gap:4px; }
   .cart-row-info .name{ font-family:'Playfair Display', serif; font-size:15px; }
   .cart-row-info .meta{ font-size:12px; color:#7a7164; }
@@ -332,20 +382,14 @@
   .field{ margin-bottom:16px; }
   .field label{ display:block; font-size:12.5px; letter-spacing:0.03em; margin-bottom:6px; color:#544c40; }
   .field input, .field textarea, .field select{
-    width:100%; border:1px solid var(--line-strong); border-radius:9px; padding:11px 13px;
+    width:100%; border:1px solid var(--line-strong); border-radius:99px; padding:11px 13px;
     font-size:14px; font-family:'Work Sans', sans-serif; background:#fff; color:var(--charcoal);
   }
-  .field textarea{ resize:vertical; min-height:64px; }
+  .field textarea{ border-radius:12px; resize:vertical; min-height:64px; }
   .field-error{ font-size:11.5px; color:var(--gold-dark); margin-top:4px; display:none; }
   .field.error input, .field.error textarea, .field.error select{ border-color:var(--gold-dark); }
   .field.error .field-error{ display:block; }
   .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .pay-options{ display:flex; gap:10px; margin-bottom:20px; }
-  .pay-opt{
-    flex:1; border:1px solid var(--line-strong); border-radius:9px; padding:11px; text-align:center;
-    font-size:12.5px; cursor:pointer; background:#fff;
-  }
-  .pay-opt.active{ border-color:var(--charcoal); background:var(--paper-2); font-weight:500; }
   .modal-close{ position:absolute; top:18px; right:18px; }
 
   .success-view{ text-align:center; padding:10px 0 6px; }
@@ -359,8 +403,9 @@
 
   @media(max-width:880px){
     .hero-grid{ grid-template-columns:1fr; }
-    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
-    .hero h1{ font-size:38px; }
+    .hero-art{ order:-1; max-width:100%; }
+    .hero-art img{ height:260px; }
+    .slide h1{ font-size:36px; }
     nav.mainnav{ display:none; }
     .grid{ grid-template-columns:repeat(2,1fr); }
     .values .wrap{ grid-template-columns:1fr; }
@@ -393,30 +438,89 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Exquisite Collection — 2026</div>
-      <h1>Elegance in <em>every</em> detail of your dress.</h1>
-      <p class="lede">Koleksi pakaian wanita eksklusif dengan pilihan bahan premium, potongan modern, dan kenyamanan istimewa untuk gaya hidup elegan Anda.</p>
-      <div class="hero-ctas">
-        <a href="#koleksi" class="btn btn-solid">Jelajahi Koleksi</a>
-        <a href="#tentang" class="btn">Tentang BELLAVIE</a>
+<!-- Banner Hero Slider Section (4 Slides) -->
+<section class="hero-slider-section">
+  <button class="slider-btn prev" id="slidePrev">❮</button>
+  <button class="slider-btn next" id="slideNext">❯</button>
+  
+  <div class="slider-container" id="heroSlider">
+    
+    <!-- Slide 1 -->
+    <div class="slide">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Exquisite Collection — 2026</div>
+          <h1>Elegance in <em>every</em> detail of your dress.</h1>
+          <p class="lede">Koleksi pakaian wanita eksklusif dengan pilihan bahan premium, potongan modern, dan kenyamanan istimewa.</p>
+          <div class="hero-ctas">
+            <a href="#koleksi" class="btn btn-solid">Jelajahi Koleksi</a>
+            <a href="#tentang" class="btn">Tentang BELLAVIE</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="swatch-tag">Silk & Rayon Premium</span>
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800" alt="BELLAVIE Banner 1">
+        </div>
       </div>
     </div>
-    <div class="hero-art">
-      <span class="swatch-tag">Silk & Rayon Premium</span>
-      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="4" width="192" height="252" rx="10" fill="#f4ece1" stroke="#eae2d6"/>
-        <g stroke="#3a2e2b" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M100 40 L78 58 L70 52 L58 72 L72 84 L72 220 L128 220 L128 84 L142 72 L130 52 L122 58 Z"/>
-          <path d="M78 58 C 88 70, 112 70, 122 58" />
-          <line x1="82" y1="100" x2="118" y2="100" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="4 4"/>
-          <line x1="82" y1="150" x2="118" y2="150" stroke="#d4af37" stroke-width="1.4" stroke-dasharray="4 4"/>
-        </g>
-      </svg>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">New Arrival Season</div>
+          <h1>Graceful <em>Silk</em> Evening Wear.</h1>
+          <p class="lede">Hadirkan kilau mewah dan tekstur selembut sutra untuk penampilan terbaik di setiap acara formal Anda.</p>
+          <div class="hero-ctas">
+            <a href="#koleksi" class="btn btn-solid">Lihat Silk Series</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="swatch-tag">Pure Silk Touch</span>
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800" alt="BELLAVIE Banner 2">
+        </div>
+      </div>
     </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Minimalist Casual</div>
+          <h1>Effortless <em>Linen & Rayon</em> Style.</h1>
+          <p class="lede">Desain kasual nan elegan yang memberikan kenyamanan maksimal untuk aktivitas harian Anda.</p>
+          <div class="hero-ctas">
+            <a href="#koleksi" class="btn btn-solid">Beli Kasual</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="swatch-tag">Breathable Linen</span>
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800" alt="BELLAVIE Banner 3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Special Offer</div>
+          <h1>Exclusive <em>Discounts</em> This Week.</h1>
+          <p class="lede">Dapatkan voucher promo khusus pembelian pertama untuk seluruh koleksi pilihan minggu ini.</p>
+          <div class="hero-ctas">
+            <a href="#koleksi" class="btn btn-solid">Klaim Promo</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="swatch-tag">Diskon s/d 20%</span>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800" alt="BELLAVIE Banner 4">
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <div class="slider-dots" id="sliderDots"></div>
 </section>
 
 <div class="stripe">
@@ -544,17 +648,6 @@
 </div>
 
 <script>
-/* ---------- Data SVG Icons ---------- */
-const ICONS = {
-  dress: `<path d="M100 30 L84 46 L76 40 L64 62 L78 74 L78 210 L122 210 L122 74 L136 62 L124 40 L116 46 Z"/><path d="M84 46 C 92 56, 108 56, 116 46"/>`,
-  atasan: `<path d="M100 34 L70 50 L60 46 L44 78 L64 92 L64 100 L64 190 L136 190 L136 100 L136 92 L156 78 L140 46 L130 50 Z"/><path d="M84 44 C 90 54, 110 54, 116 44"/>`,
-  bawahan: `<path d="M78 40 L122 40 L122 60 L150 190 L50 190 L78 60 Z"/><line x1="78" y1="60" x2="122" y2="60"/>`,
-  outer: `<path d="M100 32 L76 50 L60 46 L38 82 L58 96 L64 88 L64 195 L90 195 L90 120 L110 120 L110 195 L136 195 L136 88 L142 96 L162 82 L140 46 L124 50 Z"/>`
-};
-function iconSvg(kind, stroke){
-  return `<svg viewBox="0 0 200 220" fill="none" stroke="${stroke}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${ICONS[kind] || ICONS.dress}</svg>`;
-}
-
 const CATS = [
   {id:'semua', label:'Semua'},
   {id:'dress', label:'Dress'},
@@ -563,26 +656,113 @@ const CATS = [
   {id:'outer', label:'Outer'}
 ];
 
+/* Produk dengan Multi-Foto (3-4 foto per produk) */
 const PRODUCTS = [
-  {id:'p1', name:'Bella Silk Evening Dress', cat:'dress', icon:'dress', price:489000, sizes:['S','M','L','XL'], isNew:true},
-  {id:'p2', name:'Aira Wrap Linen Dress', cat:'dress', icon:'dress', price:379000, sizes:['S','M','L']},
-  {id:'p3', name:'Claire Midi Satin Dress', cat:'dress', icon:'dress', price:429000, sizes:['S','M','L','XL']},
-  {id:'p4', name:'Vania Blouse Silk', cat:'atasan', icon:'atasan', price:289000, sizes:['S','M','L','XL'], isNew:true},
-  {id:'p5', name:'Nara Puff Shirt Rayon', cat:'atasan', icon:'atasan', price:249000, sizes:['S','M','L']},
-  {id:'p6', name:'High-Waist Elegance Pants', cat:'bawahan', icon:'bawahan', price:299000, sizes:['S','M','L','XL']},
-  {id:'p7', name:'Alira Pleated Skirt', cat:'bawahan', icon:'bawahan', price:279000, sizes:['S','M','L']},
-  {id:'p8', name:'Bianca Luxury Outer', cat:'outer', icon:'outer', price:359000, sizes:['S','M','L','XL'], isNew:true}
+  {
+    id:'p1', name:'Bella Silk Evening Dress', cat:'dress', price:489000, sizes:['S','M','L','XL'], isNew:true,
+    images: [
+      'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=600',
+      'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600',
+      'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600'
+    ]
+  },
+  {
+    id:'p2', name:'Aira Wrap Linen Dress', cat:'dress', price:379000, sizes:['S','M','L'],
+    images: [
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
+      'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=600',
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600'
+    ]
+  },
+  {
+    id:'p3', name:'Claire Midi Satin Dress', cat:'dress', price:429000, sizes:['S','M','L','XL'],
+    images: [
+      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=600',
+      'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=600',
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600'
+    ]
+  },
+  {
+    id:'p4', name:'Vania Blouse Silk', cat:'atasan', price:289000, sizes:['S','M','L','XL'], isNew:true,
+    images: [
+      'https://images.unsplash.com/photo-1534126511673-b6899657816a?q=80&w=600',
+      'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=600',
+      'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?q=80&w=600'
+    ]
+  },
+  {
+    id:'p5', name:'Nara Puff Shirt Rayon', cat:'atasan', price:249000, sizes:['S','M','L'],
+    images: [
+      'https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=600',
+      'https://images.unsplash.com/photo-1534126511673-b6899657816a?q=80&w=600',
+      'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=600'
+    ]
+  },
+  {
+    id:'p6', name:'High-Waist Elegance Pants', cat:'bawahan', price:299000, sizes:['S','M','L','XL'],
+    images: [
+      'https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?q=80&w=600',
+      'https://images.unsplash.com/photo-1551803091-e20673f15770?q=80&w=600',
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600'
+    ]
+  }
 ];
 
-/* ---------- State ---------- */
+/* ---------- Hero Banner Slider Script ---------- */
+const heroSlider = document.getElementById('heroSlider');
+const slides = document.querySelectorAll('.slide');
+const sliderDots = document.getElementById('sliderDots');
+let currentSlide = 0;
+let slideInterval;
+
+slides.forEach((_, idx) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (idx === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goToSlide(idx));
+  sliderDots.appendChild(dot);
+});
+
+function updateSlider() {
+  heroSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+  document.querySelectorAll('.dot').forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === currentSlide);
+  });
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateSlider();
+  resetAutoSlide();
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlider();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateSlider();
+}
+
+document.getElementById('slideNext').addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+document.getElementById('slidePrev').addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+
+function startAutoSlide() {
+  slideInterval = setInterval(nextSlide, 4500);
+}
+function resetAutoSlide() {
+  clearInterval(slideInterval);
+  startAutoSlide();
+}
+startAutoSlide();
+
+/* ---------- Render Products & Image Thumbnails ---------- */
 let activeCat = 'semua';
 let cart = [];
 
-function rupiah(n){
-  return 'Rp ' + n.toLocaleString('id-ID');
-}
+function rupiah(n){ return 'Rp ' + n.toLocaleString('id-ID'); }
 
-/* ---------- Render Filters & Products ---------- */
 const filtersEl = document.getElementById('filters');
 CATS.forEach(c=>{
   const btn = document.createElement('button');
@@ -607,7 +787,14 @@ function renderProducts(){
     card.innerHTML = `
       <div class="card-media">
         ${p.isNew ? '<span class="badge-new">New</span>' : ''}
-        ${iconSvg(p.icon, '#3a2e2b')}
+        <img src="${p.images[0]}" alt="${p.name}" class="main-img" id="img-${p.id}">
+        <div class="card-thumbs">
+          ${p.images.map((img, idx) => `
+            <div class="thumb-item ${idx===0?'active':''}" onclick="switchProductImg('${p.id}', '${img}', this)">
+              <img src="${img}" alt="thumb">
+            </div>
+          `).join('')}
+        </div>
       </div>
       <div class="card-body">
         <div class="card-cat">${p.cat}</div>
@@ -635,6 +822,15 @@ function renderProducts(){
     });
   });
 }
+
+function switchProductImg(productId, imgUrl, thumbEl) {
+  const mainImg = document.getElementById(`img-${productId}`);
+  if(mainImg) mainImg.src = imgUrl;
+  const parent = thumbEl.parentElement;
+  parent.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+  thumbEl.classList.add('active');
+}
+
 renderProducts();
 
 /* ---------- Cart Logic ---------- */
@@ -644,7 +840,7 @@ function addToCart(id, size){
   if(existing){
     existing.qty += 1;
   } else {
-    cart.push({id, size, qty:1, name:product.name, price:product.price, icon:product.icon});
+    cart.push({id, size, qty:1, name:product.name, price:product.price, img:product.images[0]});
   }
   renderCart();
 }
@@ -681,7 +877,7 @@ function renderCart(){
 
   drawerItemsEl.innerHTML = cart.map(item=>`
     <div class="cart-row">
-      <div class="cart-row-media">${iconSvg(item.icon, '#d4af37')}</div>
+      <div class="cart-row-media"><img src="${item.img}" alt="${item.name}"></div>
       <div class="cart-row-info">
         <div class="name">${item.name}</div>
         <div class="meta">Ukuran: ${item.size}</div>
@@ -732,7 +928,6 @@ chatForm.addEventListener('submit', (e)=>{
   const text = chatInput.value.trim();
   if(!text) return;
 
-  // Render Pesan User
   const userMsg = document.createElement('div');
   userMsg.className = 'msg-bubble user';
   userMsg.textContent = text;
@@ -740,17 +935,16 @@ chatForm.addEventListener('submit', (e)=>{
   chatInput.value = '';
   chatBody.scrollTop = chatBody.scrollHeight;
 
-  // Simulasi Respon AI (Aira)
   setTimeout(()=>{
-    let reply = "Terima kasih sudah menghubungi BELLAVIE, Sis! Anggota tim CS kami akan membantu Anda sebentar lagi.";
+    let reply = "Terima kasih sudah menghubungi BELLAVIE, Sis! Tim CS kami akan membalas pesan Anda sebentar lagi.";
     const lower = text.toLowerCase();
 
     if(lower.includes("size") || lower.includes("ukuran") || lower.includes("bb")){
-      reply = "Untuk ukuran BELLAVIE:\n- Size S: BB 42-48 kg (LD 88cm)\n- Size M: BB 49-56 kg (LD 94cm)\n- Size L: BB 57-65 kg (LD 100cm)\n- Size XL: BB 66-75 kg (LD 108cm)\nBoleh infokan BB & TB Sis agar Aira berikan rekomendasi tepat?";
+      reply = "Untuk ukuran BELLAVIE:\n- Size S: BB 42-48 kg (LD 88cm)\n- Size M: BB 49-56 kg (LD 94cm)\n- Size L: BB 57-65 kg (LD 100cm)\n- Size XL: BB 66-75 kg (LD 108cm)\nBoleh infokan BB & TB Sis agar Aira bantu berikan rekomendasi?";
     } else if(lower.includes("retur") || lower.includes("tukar")){
-      reply = "BELLAVIE menyediakan garansi tukar size hingga 3 hari setelah barang diterima, dengan syarat menyertakan video unboxing ya, Sis ✨";
+      reply = "BELLAVIE menyediakan garansi tukar size hingga 3 hari setelah barang diterima, dengan syarat video unboxing ya, Sis ✨";
     } else if(lower.includes("stok") || lower.includes("ready")){
-      reply = "Semua koleksi yang ada di katalog halaman utama dalam status ready stock ya, Sis. Silakan dipesan sebelum kehabisan!";
+      reply = "Semua produk pada katalog halaman utama ready stock, Sis. Silakan dipesan sebelum kehabisan!";
     }
 
     const botMsg = document.createElement('div');
