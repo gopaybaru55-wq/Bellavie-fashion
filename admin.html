@@ -136,10 +136,10 @@
     // Samakan selalu dengan Project URL persis dari Supabase > Settings > API.
     const SUPABASE_URL = 'https://arvdqtpsxpxgjhqawdrhz.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_6JFrhtKfnoVTXrtogmBJjQ_miEojHfE';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     async function checkAuth() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await sb.auth.getSession();
       if (session) {
         document.getElementById('loginView').style.display = 'none';
         document.getElementById('adminView').style.display = 'flex';
@@ -162,7 +162,7 @@
       btn.innerText = 'Memproses...';
 
       try {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await sb.auth.signInWithPassword({ email, password });
         if (error) {
           errBox.innerText = 'Login gagal: ' + error.message;
           errBox.style.display = 'block';
@@ -180,12 +180,12 @@
     }
 
     async function handleLogout() {
-      await supabase.auth.signOut();
+      await sb.auth.signOut();
       checkAuth();
     }
 
     async function loadProducts() {
-      const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+      const { data, error } = await sb.from('products').select('*').order('created_at', { ascending: false });
       if (error) return alert(error.message);
 
       const tbody = document.getElementById('productTableBody');
@@ -222,7 +222,7 @@
         return;
       }
 
-      const { error } = await supabase.from('products').insert([{
+      const { error } = await sb.from('products').insert([{
         name, category, price, stock, images
       }]);
 
@@ -238,13 +238,13 @@
     }
 
     async function updateStock(id, newStock) {
-      const { error } = await supabase.from('products').update({ stock: parseInt(newStock) }).eq('id', id);
+      const { error } = await sb.from('products').update({ stock: parseInt(newStock) }).eq('id', id);
       if (error) alert('Gagal update stok: ' + error.message);
     }
 
     async function deleteProduct(id) {
       if (!confirm('Hapus produk ini dari toko?')) return;
-      const { error } = await supabase.from('products').delete().eq('id', id);
+      const { error } = await sb.from('products').delete().eq('id', id);
       if (error) alert('Gagal menghapus: ' + error.message);
       else loadProducts();
     }
