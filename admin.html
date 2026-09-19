@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin CMS — Bellavie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg: #eaf6ec;
+      --card-bg: #ffffff;
+      --primary: #125435;
+      --primary-hover: #0e3f28;
+      --border: #125435;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Work Sans', sans-serif; }
+    body { background: var(--bg); color: #1b2e23; min-height: 100vh; }
+    
+    /* Login */
+    .login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 14px; padding: 28px; width: 100%; max-width: 440px; box-shadow: 4px 4px 0px var(--border); }
+    h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    p.sub { font-size: 13px; color: #555; margin-bottom: 20px; }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; color: #333; }
+    input, select { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; }
+    button.btn-primary { width: 100%; background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    button.btn-primary:hover { background: var(--primary-hover); }
+
+    /* Admin Panel */
+    .admin-layout { display: none; min-height: 100vh; }
+    .sidebar { width: 250px; background: #0c3521; color: #fff; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .sidebar h1 { font-size: 18px; font-weight: 700; }
+    .content { flex: 1; padding: 32px; overflow-y: auto; }
+    .table-container { background: #fff; border: 2px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th, td { padding: 12px 16px; border-bottom: 1px solid #ddd; }
+    th { background: #dff0e4; font-weight: 700; color: var(--primary); }
+    .btn-danger { background: #d93838; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- Layar Login -->
+  <div id="loginView" class="login-container">
+    <div class="card">
+      <h2>ADMIN BELLAVIE</h2>
+      <p class="sub">Masuk untuk mengelola katalog pakaian dan stok barang.</p>
+      <div class="form-group">
+        <label>EMAIL</label>
+        <input type="email" id="adminEmail" placeholder="admin@bellavie.com">
+      </div>
+      <div class="form-group">
+        <label>PASSWORD</label>
+        <input type="password" id="adminPassword" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" onclick="handleLogin()">➔ MASUK</button>
+      <p id="loginError" style="color:red; font-size:12px; margin-top:10px; display:none;"></p>
+    </div>
+  </div>
+
+  <!-- Dashboard CMS -->
+  <div id="adminView" class="admin-layout">
+    <div class="sidebar">
+      <h1>⚡ BELLAVIE CMS</h1>
+      <p style="font-size: 12px; opacity: 0.8;" id="userBadge"></p>
+      <a href="index.html" target="_blank" style="color: #a3e635; text-decoration: none; font-size: 13px;">👁 Lihat Website</a>
+      <div style="margin-top: auto;">
+        <button onclick="handleLogout()" style="width:100%; padding:10px; background:#fff; color:#0c3521; border:none; border-radius:6px; font-weight:600; cursor:pointer;">Keluar</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Manajemen Produk & Stok</h2>
+      <p class="sub">Tambahkan pakaian baru atau perbarui stok barang yang tampil di toko.</p>
+
+      <!-- Form Tambah Produk -->
+      <div class="card" style="max-width: 100%; margin-bottom: 24px;">
+        <h3 style="margin-bottom: 14px;">+ Tambah Produk Baru</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+          <div>
+            <label>Nama Baju</label>
+            <input type="text" id="pName" placeholder="Contoh: Bella Silk Dress">
+          </div>
+          <div>
+            <label>Kategori</label>
+            <select id="pCat">
+              <option value="dress">Dress</option>
+              <option value="atasan">Atasan</option>
+              <option value="bawahan">Bawahan</option>
+              <option value="outer">Outer</option>
+            </select>
+          </div>
+          <div>
+            <label>Harga (Rp)</label>
+            <input type="number" id="pPrice" placeholder="Contoh: 350000">
+          </div>
+          <div>
+            <label>Stok Barang</label>
+            <input type="number" id="pStock" value="10">
+          </div>
+        </div>
+        <div style="margin-top: 14px;">
+          <label>URL Foto (Pisahkan koma jika lebih dari 1 foto)</label>
+          <input type="text" id="pImages" placeholder="https://images.unsplash.com/... , https://images.unsplash.com/...">
+        </div>
+        <button class="btn-primary" style="margin-top: 16px; width: auto; padding: 10px 24px;" onclick="addProduct()">Simpan Produk</button>
+      </div>
+
+      <!-- Tabel Daftar Produk -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Nama Produk</th>
+              <th>Kategori</th>
+              <th>Harga</th>
+              <th>Stok (Edit Langsung)</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- Data produk dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://arvdqtpsxpgjhqawdrhz.supabase.co';
+    const SUPABASE_KEY = 'TEMPEL_KODE_PUBLISHABLE_KEY_ANDA_DI_SINI';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function checkAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('adminView').style.display = 'flex';
+        document.getElementById('userBadge').innerText = session.user.email;
+        loadProducts();
+      } else {
+        document.getElementById('loginView').style.display = 'flex';
+        document.getElementById('adminView').style.display = 'none';
+      }
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('adminEmail').value;
+      const password = document.getElementById('adminPassword').value;
+      const errBox = document.getElementById('loginError');
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        errBox.innerText = 'Login gagal: ' + error.message;
+        errBox.style.display = 'block';
+      } else {
+        errBox.style.display = 'none';
+        checkAuth();
+      }
+    }
+
+    async function handleLogout() {
+      await supabase.auth.signOut();
+      checkAuth();
+    }
+
+    async function loadProducts() {
+      const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+      if (error) return alert(error.message);
+
+      const tbody = document.getElementById('productTableBody');
+      tbody.innerHTML = '';
+      data.forEach(p => {
+        const thumb = p.images && p.images.length > 0 ? p.images[0] : '';
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${thumb}" style="width:48px; height:48px; object-fit:cover; border-radius:6px;"></td>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.category}</td>
+            <td>Rp ${Number(p.price).toLocaleString('id-ID')}</td>
+            <td>
+              <input type="number" value="${p.stock || 0}" style="width:75px; padding:4px 8px;" onchange="updateStock('${p.id}', this.value)">
+            </td>
+            <td>
+              <button class="btn-danger" onclick="deleteProduct('${p.id}')">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    async function addProduct() {
+      const name = document.getElementById('pName').value;
+      const category = document.getElementById('pCat').value;
+      const price = parseFloat(document.getElementById('pPrice').value);
+      const stock = parseInt(document.getElementById('pStock').value) || 0;
+      const imagesInput = document.getElementById('pImages').value;
+      const images = imagesInput.split(',').map(s => s.trim()).filter(Boolean);
+
+      if (!name || isNaN(price) || images.length === 0) {
+        alert('Mohon lengkapi nama baju, harga, dan minimal 1 link foto!');
+        return;
+      }
+
+      const { error } = await supabase.from('products').insert([{
+        name, category, price, stock, images
+      }]);
+
+      if (error) {
+        alert('Gagal menambah: ' + error.message);
+      } else {
+        alert('Produk berhasil disimpan ke database!');
+        document.getElementById('pName').value = '';
+        document.getElementById('pPrice').value = '';
+        document.getElementById('pImages').value = '';
+        loadProducts();
+      }
+    }
+
+    async function updateStock(id, newStock) {
+      const { error } = await supabase.from('products').update({ stock: parseInt(newStock) }).eq('id', id);
+      if (error) alert('Gagal update stok: ' + error.message);
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm('Hapus produk ini dari toko?')) return;
+      const { error } = await supabase.from('products').delete().eq('id', id);
+      if (error) alert('Gagal menghapus: ' + error.message);
+      else loadProducts();
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>
