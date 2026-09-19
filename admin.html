@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -17,7 +18,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Work Sans', sans-serif; }
     body { background: var(--bg); color: #1b2e23; min-height: 100vh; }
-    
+
     /* Login */
     .login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
     .card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 14px; padding: 28px; width: 100%; max-width: 440px; box-shadow: 4px 4px 0px var(--border); }
@@ -28,6 +29,7 @@
     input, select { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; }
     button.btn-primary { width: 100%; background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
     button.btn-primary:hover { background: var(--primary-hover); }
+    button.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
     /* Admin Panel */
     .admin-layout { display: none; min-height: 100vh; }
@@ -56,7 +58,7 @@
         <label>PASSWORD</label>
         <input type="password" id="adminPassword" placeholder="••••••••">
       </div>
-      <button class="btn-primary" onclick="handleLogin()">➔ MASUK</button>
+      <button class="btn-primary" id="loginBtn" onclick="handleLogin()">➔ MASUK</button>
       <p id="loginError" style="color:red; font-size:12px; margin-top:10px; display:none;"></p>
     </div>
   </div>
@@ -131,7 +133,9 @@
   </div>
 
   <script>
-    const SUPABASE_URL = 'https://arvdqtpsxpgjhqawdrhz.supabase.co';
+    // PERBAIKAN: URL sebelumnya salah ketik (kurang huruf "x").
+    // Samakan selalu dengan Project URL persis dari Supabase > Settings > API.
+    const SUPABASE_URL = 'https://arvdqtpsxpxgjhqawdrhz.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_6JFrhtKfnoVTXrtogmBJjQ_miEojHfE';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -149,17 +153,30 @@
     }
 
     async function handleLogin() {
-      const email = document.getElementById('adminEmail').value;
+      const email = document.getElementById('adminEmail').value.trim();
       const password = document.getElementById('adminPassword').value;
       const errBox = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
 
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        errBox.innerText = 'Login gagal: ' + error.message;
+      errBox.style.display = 'none';
+      btn.disabled = true;
+      btn.innerText = 'Memproses...';
+
+      try {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+          errBox.innerText = 'Login gagal: ' + error.message;
+          errBox.style.display = 'block';
+        } else {
+          await checkAuth();
+        }
+      } catch (err) {
+        // Ini yang menangkap masalah jaringan/URL salah, supaya tidak lagi "stuck" tanpa pesan.
+        errBox.innerText = 'Terjadi kesalahan koneksi: ' + err.message;
         errBox.style.display = 'block';
-      } else {
-        errBox.style.display = 'none';
-        checkAuth();
+      } finally {
+        btn.disabled = false;
+        btn.innerText = '➔ MASUK';
       }
     }
 
