@@ -418,6 +418,7 @@
     .chat-box{ right:15px; bottom:80px; width:calc(100vw - 30px); }
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -656,57 +657,40 @@ const CATS = [
   {id:'outer', label:'Outer'}
 ];
 
-/* Produk dengan Multi-Foto (3-4 foto per produk) */
-const PRODUCTS = [
-  {
-    id:'p1', name:'Bella Silk Evening Dress', cat:'dress', price:489000, sizes:['S','M','L','XL'], isNew:true,
-    images: [
-      'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=600',
-      'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600',
-      'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600'
-    ]
-  },
-  {
-    id:'p2', name:'Aira Wrap Linen Dress', cat:'dress', price:379000, sizes:['S','M','L'],
-    images: [
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
-      'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=600',
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600'
-    ]
-  },
-  {
-    id:'p3', name:'Claire Midi Satin Dress', cat:'dress', price:429000, sizes:['S','M','L','XL'],
-    images: [
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=600',
-      'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=600',
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600'
-    ]
-  },
-  {
-    id:'p4', name:'Vania Blouse Silk', cat:'atasan', price:289000, sizes:['S','M','L','XL'], isNew:true,
-    images: [
-      'https://images.unsplash.com/photo-1534126511673-b6899657816a?q=80&w=600',
-      'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=600',
-      'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?q=80&w=600'
-    ]
-  },
-  {
-    id:'p5', name:'Nara Puff Shirt Rayon', cat:'atasan', price:249000, sizes:['S','M','L'],
-    images: [
-      'https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=600',
-      'https://images.unsplash.com/photo-1534126511673-b6899657816a?q=80&w=600',
-      'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=600'
-    ]
-  },
-  {
-    id:'p6', name:'High-Waist Elegance Pants', cat:'bawahan', price:299000, sizes:['S','M','L','XL'],
-    images: [
-      'https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?q=80&w=600',
-      'https://images.unsplash.com/photo-1551803091-e20673f15770?q=80&w=600',
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600'
-    ]
+/* Koneksi ke Supabase */
+const SUPABASE_URL = 'https://arvdqtpsxpgjhqawdrhz.supabase.co';
+const SUPABASE_KEY = 'TEMPEL_KODE_PUBLISHABLE_KEY_ANDA_DI_SINI';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* Produk dimuat langsung dari database Supabase */
+let PRODUCTS = [];
+
+async function fetchProductsFromDatabase() {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Gagal memuat produk:', error);
+    return;
   }
-];
+
+  PRODUCTS = data.map(item => ({
+    id: item.id,
+    name: item.name,
+    cat: item.category,
+    price: Number(item.price),
+    sizes: item.sizes || ['S', 'M', 'L', 'XL'],
+    isNew: item.is_new,
+    images: item.images || []
+  }));
+
+  // Render ulang produk setelah data berhasil diambil
+  renderProducts();
+}
+
+fetchProductsFromDatabase();
 
 /* ---------- Hero Banner Slider Script ---------- */
 const heroSlider = document.getElementById('heroSlider');
