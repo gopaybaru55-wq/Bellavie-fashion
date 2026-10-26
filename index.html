@@ -3,1035 +3,775 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BELLAVIE — Women's Fashion</title>
+<title>BELLAVIE — Busana Wanita Medan</title>
+<meta name="description" content="BELLAVIE, butik busana wanita dari Medan. Dress, atasan, dan bawahan dengan potongan modern. Kirim ke seluruh Indonesia.">
+<meta name="theme-color" content="#e8e7e3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f0f0f'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='%23c9f31d' font-family='serif' font-style='italic'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-main:#fdfbf7;
-    --paper-2:#f4ece1;
-    --charcoal:#3a2e2b;
-    --gold:#d4af37;
-    --gold-dark:#b38f28;
-    --line:#eae2d6;
-    --line-strong:#d2c5b3;
-    --sage:#6a7b5d;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--bg-main);
-    color:var(--charcoal);
-    font-family:'Work Sans', sans-serif;
-    font-weight:400;
-    line-height:1.55;
-  }
-  h1,h2,h3, .display{
-    font-family:'Playfair Display', serif;
-    font-weight:600;
-    letter-spacing:-0.01em;
-  }
-  a{ color:inherit; }
-  img{ max-width:100%; display:block; }
-  button{ font-family:inherit; cursor:pointer; }
-  .wrap{ max-width:1140px; margin:0 auto; padding:0 32px; }
+:root{
+  --bg:#e8e7e3; --card:#f5f4f0; --ink:#0f0f0f; --muted:#6b6a65;
+  --line:#cfcdc6; --lime:#c9f31d; --danger:#c0392b;
+  --ticker-h:38px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Archivo',system-ui,sans-serif; font-size:15px; line-height:1.5;
+  padding-bottom:var(--ticker-h); -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+a{color:inherit}
+.serif{font-family:'Instrument Serif',serif;font-weight:400}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.up{text-transform:uppercase;letter-spacing:.08em}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
-  /* ---------- header ---------- */
-  header{
-    position:sticky; top:0; z-index:40;
-    background:rgba(253,251,247,0.95);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  .headbar{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 0;
-  }
-  .logo{
-    font-family:'Playfair Display', serif;
-    font-size:26px; font-weight:700; letter-spacing:0.04em;
-    color:var(--charcoal);
-  }
-  .logo span{ color:var(--gold); }
-  nav.mainnav{ display:flex; gap:32px; }
-  nav.mainnav a{
-    font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--charcoal); text-decoration:none; opacity:0.8;
-    padding-bottom:3px; border-bottom:1px solid transparent;
-    transition:all .15s;
-  }
-  nav.mainnav a:hover{ opacity:1; border-color:var(--gold); color:var(--gold-dark); }
-  .head-actions{ display:flex; align-items:center; gap:18px; }
-  .cart-btn{
-    display:flex; align-items:center; gap:8px;
-    background:none; border:1px solid var(--charcoal); border-radius:999px;
-    padding:9px 16px 9px 14px; font-size:13px; letter-spacing:0.03em;
-  }
-  .cart-btn:hover{ background:var(--charcoal); color:var(--bg-main); }
-  .cart-count{
-    background:var(--gold); color:#fff;
-    border-radius:999px; font-size:11px; min-width:18px; height:18px;
-    display:flex; align-items:center; justify-content:center; padding:0 4px;
-    font-family:'Space Mono', monospace; font-weight:700;
-  }
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:40;background:rgba(232,231,227,.88);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 0}
+.bar nav{display:flex;gap:26px;font-size:12px}
+.bar nav a{text-decoration:none;color:var(--muted);transition:color .15s}
+.bar nav a:hover{color:var(--ink)}
+.logo{font-family:'Instrument Serif',serif;font-size:30px;letter-spacing:.02em;text-decoration:none;line-height:1}
+.logo i{color:var(--ink);background:var(--lime);padding:0 5px;border-radius:4px;font-style:normal;margin-left:2px}
+.bar .right{display:flex;justify-content:flex-end}
+.cart-btn{display:flex;align-items:center;gap:8px;font-size:12px;border:1px solid var(--ink);border-radius:99px;padding:8px 14px;transition:.15s}
+.cart-btn:hover{background:var(--ink);color:var(--bg)}
+.cart-btn b{background:var(--lime);color:var(--ink);min-width:20px;height:20px;border-radius:99px;display:grid;place-items:center;font-size:11px;padding:0 5px}
 
-  /* ---------- Hero Banner Slider ---------- */
-  .hero-slider-section{
-    position:relative;
-    background: linear-gradient(180deg, rgba(244,236,225,0.4) 0%, rgba(253,251,247,1) 100%);
-    border-bottom:1px solid var(--line);
-    overflow:hidden;
-  }
-  .slider-container{
-    display:flex;
-    transition:transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    width:100%;
-  }
-  .slide{
-    min-width:100%;
-    padding:64px 0 56px;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
-  }
-  .eyebrow{
-    font-family:'Space Mono', monospace; font-size:12px;
-    text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-dark);
-    display:flex; align-items:center; gap:10px; margin-bottom:18px;
-  }
-  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold-dark); display:inline-block; }
-  .slide h1{
-    font-size:52px; line-height:1.08; margin-bottom:20px; color:var(--charcoal);
-  }
-  .slide h1 em{ font-style:italic; color:var(--gold-dark); }
-  .slide p.lede{
-    font-size:16px; max-width:420px; color:#554a46; margin-bottom:30px;
-  }
-  .hero-ctas{ display:flex; gap:14px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:13px 24px; border-radius:999px; font-size:14px; letter-spacing:0.02em;
-    border:1px solid var(--charcoal); text-decoration:none; background:none; color:var(--charcoal);
-    transition:all .15s;
-  }
-  .btn-solid{ background:var(--charcoal); color:#fff; }
-  .btn-solid:hover{ background:var(--gold-dark); border-color:var(--gold-dark); }
-  .btn:not(.btn-solid):hover{ background:var(--charcoal); color:#fff; }
+/* ---------- hero / rack ---------- */
+.intro{text-align:center;padding:22px 0 4px}
+.intro .tag{font-size:12px;color:var(--muted)}
+.intro h1{font-size:clamp(38px,5.4vw,66px);line-height:1;margin:8px 0 0;letter-spacing:-.01em}
+.intro h1 em{font-style:italic}
+.filters{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:18px 0 0}
+.chip{font-size:12px;padding:8px 16px;border-radius:99px;border:1px solid var(--line);transition:.15s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
-  .hero-art{ position:relative; }
-  .hero-art img{
-    width:100%; height:340px; object-fit:cover; border-radius:12px;
-    border:1px solid var(--line);
-  }
-  .swatch-tag{
-    position:absolute; top:-14px; right:14px;
-    background:var(--gold-dark); color:#fff;
-    font-family:'Space Mono', monospace; font-size:11px;
-    padding:6px 12px; border-radius:4px; transform:rotate(4deg);
-    letter-spacing:0.04em; z-index:2;
-  }
+.rack{position:relative;margin-top:10px}
+.scroller{
+  overflow-x:auto;overflow-y:hidden;cursor:grab;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;padding:0 max(24px,calc((100vw - 1180px)/2 + 24px));
+}
+.scroller::-webkit-scrollbar{display:none}
+.scroller.drag{cursor:grabbing;user-select:none}
+.track{position:relative;display:flex;gap:48px;width:max-content;min-width:100%;padding:20px 0 40px}
+.track::before{ /* rel baju */
+  content:"";position:absolute;left:-100vw;right:-100vw;top:30px;height:3px;
+  background:linear-gradient(#2b2b2b,#0f0f0f);border-radius:3px;
+}
+.hang{position:relative;flex:0 0 auto;width:min(230px,58vw);text-align:center;padding-top:0}
+.hanger{width:54px;height:40px;margin:0 auto -6px;position:relative;z-index:2;display:block}
+.swing{display:block;transform-origin:50% 0;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.hang:hover .swing,.hang:focus-visible .swing{animation:swing 1.1s ease-in-out}
+@keyframes swing{0%{transform:rotate(0)}25%{transform:rotate(2.4deg)}55%{transform:rotate(-1.8deg)}80%{transform:rotate(.7deg)}100%{transform:rotate(0)}}
+.frame{display:block;position:relative;aspect-ratio:3/4;background:var(--card);border-radius:6px;overflow:hidden;box-shadow:0 14px 26px -16px rgba(0,0,0,.45)}
+.frame img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.hang:hover .frame img{transform:scale(1.04)}
+.tagbadge{position:absolute;top:10px;left:10px;font-size:10px;background:var(--ink);color:var(--lime);padding:3px 8px;border-radius:99px;letter-spacing:.08em}
+.h-name{display:block;margin-top:16px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.h-price{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.skeleton .frame{background:linear-gradient(90deg,#dedcd6,#ecebe6,#dedcd6);background-size:200% 100%;animation:sh 1.3s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.rack-nav{display:flex;justify-content:center;gap:10px;margin-top:-6px}
+.rack-nav button{width:42px;height:42px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:.15s}
+.rack-nav button:hover{background:var(--ink);color:var(--bg)}
+.hint{text-align:center;font-size:12px;color:var(--muted);margin-top:14px}
+.state{padding:70px 24px;text-align:center;color:var(--muted)}
+.state button{margin-top:14px}
 
-  /* Slider Controls */
-  .slider-btn{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:42px; height:42px; border-radius:50%;
-    background:rgba(255,255,255,0.85); border:1px solid var(--line-strong);
-    color:var(--charcoal); font-size:18px; display:flex; align-items:center;
-    justify-content:center; z-index:10; cursor:pointer; transition:all .2s;
-  }
-  .slider-btn:hover{ background:var(--charcoal); color:#fff; }
-  .slider-btn.prev{ left:20px; }
-  .slider-btn.next{ right:20px; }
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:99px;border:1px solid var(--ink);font-size:13px;font-weight:500;transition:.15s;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn.solid:hover{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.btn.lime{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.btn.lime:hover{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn.full{width:100%}
 
-  .slider-dots{
-    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-    display:flex; gap:8px; z-index:10;
-  }
-  .dot{
-    width:10px; height:10px; border-radius:50%; background:var(--line-strong);
-    cursor:pointer; transition:all .2s;
-  }
-  .dot.active{ background:var(--gold-dark); width:28px; border-radius:10px; }
+/* ---------- sections ---------- */
+section.block{padding:80px 0 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.sec-head h2{font-size:clamp(34px,5vw,56px);line-height:1}
+.sec-head h2 em{font-style:italic}
+.sec-head p{max-width:360px;color:var(--muted);font-size:14px}
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{background:var(--card);border-radius:14px;padding:26px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between}
+.tile small{font-size:11px;color:var(--muted);letter-spacing:.1em}
+.tile h3{font-size:30px;line-height:1.05;margin:20px 0 8px}
+.tile p{font-size:13.5px;color:var(--muted)}
+.size-wrap{background:var(--card);border-radius:14px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:480px}
+th,td{text-align:left;padding:15px 22px;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.store{display:grid;grid-template-columns:1fr 1.2fr;gap:16px}
+.store .info{background:var(--ink);color:var(--bg);border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:20px}
+.store .info h3{font-size:34px;line-height:1.05}
+.store .info dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9a9992;margin-bottom:2px}
+.store .info dd{font-size:14.5px}
+.store iframe{width:100%;height:100%;min-height:340px;border:0;border-radius:14px;filter:grayscale(.85) contrast(1.05)}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+details summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
+details summary::after{content:"+";font-size:20px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin-top:10px;color:var(--muted);max-width:640px;font-size:14px}
+footer{margin-top:90px;padding:46px 0 34px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.foot p{max-width:290px;color:var(--muted);font-size:13px;margin-top:10px}
+.foot h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:500}
+.foot a{display:block;text-decoration:none;font-size:14px;margin-bottom:8px}
+.foot a:hover{text-decoration:underline}
+.copy{margin-top:34px;font-size:12px;color:var(--muted)}
 
-  /* ---------- stats strip ---------- */
-  .stripe{
-    border-bottom:1px solid var(--line);
-    padding:22px 0;
-    background:#fff;
-  }
-  .stripe .wrap{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
-  }
-  .stripe-item{
-    font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.05em;
-    color:#665c56; display:flex; align-items:center; gap:8px;
-  }
-  .stripe-item b{ color:var(--charcoal); font-weight:700; }
+/* ---------- ticker ---------- */
+.ticker{position:fixed;left:0;right:0;bottom:0;height:var(--ticker-h);background:var(--lime);color:var(--ink);z-index:50;overflow:hidden;display:flex;align-items:center;border-top:1px solid rgba(0,0,0,.15)}
+.ticker .move{display:flex;gap:44px;white-space:nowrap;animation:tick 32s linear infinite;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding-left:44px}
+@keyframes tick{to{transform:translateX(-50%)}}
 
-  /* ---------- collection ---------- */
-  .collection{ padding:60px 0 20px; }
-  .coll-head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    margin-bottom:30px; gap:20px; flex-wrap:wrap;
-  }
-  .coll-head h2{ font-size:32px; color:var(--charcoal); }
-  .coll-head p{ font-size:14px; color:#6b6255; max-width:380px; }
+/* ---------- WA floating ---------- */
+.wa{position:fixed;right:20px;bottom:calc(var(--ticker-h) + 16px);z-index:45;background:var(--ink);color:#fff;border-radius:99px;padding:12px 18px;font-size:13px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:8px;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);transition:.15s}
+.wa:hover{background:#1fa855}
+.wa svg{width:18px;height:18px;fill:currentColor}
 
-  .filters{
-    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:38px;
-  }
-  .filter-chip{
-    border:1px solid var(--line-strong); background:var(--bg-main);
-    padding:9px 18px; border-radius:999px; font-size:13px; letter-spacing:0.02em;
-    color:#544c40; transition:all .15s;
-  }
-  .filter-chip:hover{ border-color:var(--charcoal); color:var(--charcoal); }
-  .filter-chip.active{ background:var(--charcoal); border-color:var(--charcoal); color:#fff; }
+/* ---------- product stage ---------- */
+.stage{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;overflow-y:auto}
+.stage.show{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:none}}
+.stage-top{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;z-index:3;background:linear-gradient(var(--bg) 60%,transparent)}
+.stage-top .count{font-size:12px;color:var(--muted)}
+.close{width:40px;height:40px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:16px;transition:.15s}
+.close:hover{background:var(--ink);color:var(--bg)}
+.stage-body{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;max-width:1080px;margin:0 auto;padding:0 24px 80px;min-height:calc(100vh - 150px)}
+.stage-img{position:relative;aspect-ratio:3/4;margin:0 auto;width:min(100%,520px,calc(76vh * .75));background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 30px 50px -30px rgba(0,0,0,.5)}
+.stage-img img{width:100%;height:100%;object-fit:cover}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(245,244,240,.9);display:grid;place-items:center;border:1px solid var(--line);z-index:2}
+.arrow:hover{background:var(--ink);color:#fff}
+.arrow.l{left:10px}.arrow.r{right:10px}
+.stage-info .cat{font-size:12px;color:var(--muted)}
+.stage-info h2{font-size:clamp(32px,4.4vw,52px);line-height:1;margin:10px 0 8px;text-transform:uppercase;font-family:'Archivo';font-weight:700;letter-spacing:-.01em}
+.stage-info .price{font-size:20px;margin-bottom:22px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.pill{font-size:11px;padding:7px 15px;border:1px solid var(--ink);border-radius:99px;font-weight:600;letter-spacing:.08em;transition:.15s;min-width:46px}
+.pill:hover{background:rgba(0,0,0,.07)}
+.pill.on{background:var(--ink);color:var(--bg)}
+.pill.off{opacity:.3;pointer-events:none;text-decoration:line-through}
+.lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
+.lbl button{text-decoration:underline;text-transform:none;letter-spacing:0}
+.stage-info .btn{margin-top:6px}
+.stock{font-size:12.5px;color:var(--muted);margin-top:14px}
 
-  .grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px 24px;
-    padding-bottom:70px;
-  }
-  .card{
-    border:1px solid var(--line);
-    border-radius:14px; overflow:hidden; background:#fff;
-    display:flex; flex-direction:column;
-    transition:border-color .2s, transform .2s, box-shadow .2s;
-    position:relative;
-  }
-  .card:hover{ border-color:var(--line-strong); transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.04); }
-  
-  /* Product Card Image Gallery */
-  .card-media{
-    aspect-ratio:4/5; background:var(--paper-2);
-    position:relative; border-bottom:1px solid var(--line);
-    overflow:hidden;
-  }
-  .card-media img.main-img{
-    width:100%; height:100%; object-fit:cover; transition:src 0.2s;
-  }
-  .badge-new{
-    position:absolute; top:12px; left:12px;
-    font-family:'Space Mono', monospace; font-size:10px; letter-spacing:0.06em;
-    background:#fff; border:1px solid var(--gold); color:var(--gold-dark); border-radius:999px;
-    padding:4px 10px; text-transform:uppercase; font-weight:700; z-index:2;
-  }
-  .card-thumbs{
-    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
-    display:flex; gap:6px; background:rgba(255,255,255,0.85);
-    padding:4px 8px; border-radius:20px; backdrop-filter:blur(4px);
-  }
-  .thumb-item{
-    width:24px; height:24px; border-radius:50%; overflow:hidden;
-    border:1px solid var(--line-strong); cursor:pointer; opacity:0.7; transition:all .15s;
-  }
-  .thumb-item.active, .thumb-item:hover{ opacity:1; border-color:var(--gold-dark); transform:scale(1.1); }
-  .thumb-item img{ width:100%; height:100%; object-fit:cover; }
+/* ---------- drawer / modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(15,15,15,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:70}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:420px;max-width:100%;background:var(--bg);z-index:75;transform:translateX(100%);transition:transform .32s ease;display:flex;flex-direction:column}
+.drawer.show{transform:none}
+.d-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line)}
+.d-head h3{font-size:30px}
+.d-items{flex:1;overflow-y:auto;padding:6px 24px}
+.row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row .th{width:64px;height:84px;border-radius:6px;overflow:hidden;background:var(--card);flex:none}
+.row .th img{width:100%;height:100%;object-fit:cover}
+.row .in{flex:1;display:flex;flex-direction:column;gap:3px}
+.row .nm{font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.row .mt{font-size:12px;color:var(--muted)}
+.qty{display:flex;align-items:center;gap:10px;margin-top:6px}
+.qty button{width:26px;height:26px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;line-height:1}
+.qty button:hover{background:var(--ink);color:var(--bg)}
+.rm{align-self:flex-start;font-size:12px;text-decoration:underline;color:var(--muted);margin-top:4px}
+.d-foot{padding:20px 24px 26px;border-top:1px solid var(--line);background:var(--card)}
+.sub{display:flex;justify-content:space-between;font-size:16px;margin-bottom:6px;font-weight:600}
+.note{font-size:12px;color:var(--muted);margin-bottom:14px}
+.empty{text-align:center;color:var(--muted);padding:70px 10px}
 
-  .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
-  .card-cat{ font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-dark); }
-  .card-name{ font-family:'Playfair Display', serif; font-size:18px; font-weight:600; line-height:1.25; }
-  .card-price{ font-family:'Space Mono', monospace; font-size:14px; margin-top:2px; }
-  .card-foot{ margin-top:auto; display:flex; gap:8px; align-items:center; padding-top:10px; }
-  select.size-select{
-    flex:1; border:1px solid var(--line-strong); background:#fff;
-    border-radius:8px; padding:9px 8px; font-size:12.5px; color:var(--charcoal);
-    font-family:'Work Sans', sans-serif;
-  }
-  .add-btn{
-    background:var(--charcoal); color:#fff; border:none; border-radius:8px;
-    padding:9px 14px; font-size:12.5px; letter-spacing:0.02em; white-space:nowrap;
-    transition:background .15s;
-  }
-  .add-btn:hover{ background:var(--gold-dark); }
-  .add-btn.added{ background:var(--sage); }
+.modal-wrap{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(15,15,15,.55)}
+.modal-wrap.show{display:flex}
+.modal{background:var(--bg);border-radius:16px;width:520px;max-width:100%;max-height:92vh;overflow-y:auto;padding:30px;position:relative}
+.modal h3{font-size:36px;line-height:1;margin-bottom:6px}
+.modal .lead{color:var(--muted);font-size:13.5px;margin-bottom:22px}
+.modal .close{position:absolute;top:16px;right:16px}
+.field{margin-bottom:14px}
+.field label,.fl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:12px 14px;font:inherit;color:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink)}
+.field textarea{min-height:76px;resize:vertical}
+.field .err{display:none;color:var(--danger);font-size:12px;margin-top:4px}
+.field.bad input,.field.bad select,.field.bad textarea{border-color:var(--danger)}
+.field.bad .err{display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opts{display:grid;gap:8px;margin-bottom:14px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:12px 14px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt input{margin-top:4px;accent-color:#0f0f0f}
+.opt b{display:block;font-size:14px}
+.opt span{font-size:12px;color:var(--muted)}
+.sum{background:var(--card);border-radius:10px;padding:14px 16px;margin:6px 0 16px;font-size:13px}
+.sum div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.sum .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:9px;font-weight:700;font-size:15px}
+.done{text-align:center}
+.done .ck{width:58px;height:58px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:26px;margin:6px auto 16px}
+.code{font-family:ui-monospace,Menlo,monospace;background:var(--card);border-radius:10px;padding:12px;margin:16px 0;letter-spacing:.08em;font-size:16px}
+.done p{color:var(--muted);font-size:14px;margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:calc(var(--ticker-h) + 24px);transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:100;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
-  /* ---------- values ---------- */
-  .values{
-    background:var(--charcoal); color:#fff;
-    padding:56px 0;
-  }
-  .values .wrap{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:34px;
-  }
-  .value-item .num{
-    font-family:'Space Mono', monospace; font-size:12px; color:var(--gold);
-    margin-bottom:10px; letter-spacing:0.08em;
-  }
-  .value-item h3{ font-size:19px; margin-bottom:8px; font-weight:500; font-family:'Playfair Display', serif; }
-  .value-item p{ font-size:13.5px; color:#d2c8be; }
-
-  /* ---------- footer ---------- */
-  footer{ padding:48px 0 36px; background:#fff; border-top:1px solid var(--line); }
-  .foot-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; padding-bottom:28px; }
-  .foot-brand .logo{ margin-bottom:10px; }
-  .foot-brand p{ font-size:13px; color:#6b6255; max-width:280px; }
-  .foot-cols{ display:flex; gap:60px; flex-wrap:wrap; }
-  .foot-col h4{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; color:#8a8172; }
-  .foot-col a{ display:block; font-size:13.5px; margin-bottom:9px; text-decoration:none; color:var(--charcoal); opacity:0.85; }
-  .foot-col a:hover{ opacity:1; color:var(--gold-dark); }
-  .foot-bottom{
-    border-top:1px solid var(--line); padding-top:20px;
-    font-size:12px; color:#8a8172; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:'Space Mono', monospace;
-  }
-
-  /* ---------- Floating Widget AI Chatbot ---------- */
-  .chat-widget-btn{
-    position:fixed; bottom:28px; right:28px; z-index:90;
-    background:var(--charcoal); color:#fff; border:1px solid var(--gold);
-    padding:13px 22px; border-radius:999px; font-size:13.5px; font-weight:500;
-    box-shadow:0 6px 20px rgba(0,0,0,0.15); display:flex; align-items:center; gap:8px;
-    transition:all .2s;
-  }
-  .chat-widget-btn:hover{ background:var(--gold-dark); border-color:var(--gold-dark); transform:scale(1.03); }
-  
-  .chat-box{
-    position:fixed; bottom:92px; right:28px; width:360px; max-width:90vw; height:490px;
-    background:#fff; border-radius:16px; border:1px solid var(--line-strong);
-    box-shadow:0 12px 35px rgba(0,0,0,0.15); z-index:95;
-    display:none; flex-direction:column; overflow:hidden;
-  }
-  .chat-box.show{ display:flex; }
-  .chat-head{
-    background:var(--charcoal); color:#fff; padding:16px 20px;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .chat-head-title{ font-family:'Playfair Display', serif; font-size:16px; }
-  .chat-head-sub{ font-size:11px; color:var(--gold); display:block; font-family:'Space Mono', monospace; }
-  .chat-body{
-    flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;
-    background:var(--bg-main); font-size:13px;
-  }
-  .msg-bubble{ max-width:82%; padding:10px 14px; border-radius:12px; line-height:1.45; }
-  .msg-bubble.bot{ background:#fff; border:1px solid var(--line); color:var(--charcoal); align-self:flex-start; border-bottom-left-radius:2px; }
-  .msg-bubble.user{ background:var(--charcoal); color:#fff; align-self:flex-end; border-bottom-right-radius:2px; }
-  .chat-foot{ padding:12px; border-top:1px solid var(--line); display:flex; gap:8px; background:#fff; }
-  .chat-foot input{
-    flex:1; border:1px solid var(--line-strong); border-radius:20px; padding:8px 14px;
-    font-size:13px; outline:none; font-family:inherit;
-  }
-  .chat-foot button{
-    background:var(--charcoal); color:#fff; border:none; padding:8px 16px; border-radius:20px;
-    font-size:12.5px; transition:background .15s;
-  }
-  .chat-foot button:hover{ background:var(--gold-dark); }
-
-  /* ---------- cart drawer ---------- */
-  .overlay{
-    position:fixed; inset:0; background:rgba(38,30,27,0.45);
-    opacity:0; pointer-events:none; transition:opacity .25s; z-index:60;
-  }
-  .overlay.show{ opacity:1; pointer-events:auto; }
-  .drawer{
-    position:fixed; top:0; right:0; height:100%; width:420px; max-width:92vw;
-    background:var(--bg-main); z-index:70; box-shadow:-8px 0 30px rgba(0,0,0,0.12);
-    transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column;
-  }
-  .drawer.show{ transform:translateX(0); }
-  .drawer-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:22px 24px; border-bottom:1px solid var(--line);
-  }
-  .drawer-head h3{ font-size:20px; font-family:'Playfair Display', serif; }
-  .icon-btn{ background:none; border:none; font-size:20px; line-height:1; color:var(--charcoal); }
-  .drawer-items{ flex:1; overflow-y:auto; padding:10px 24px; }
-  .cart-row{
-    display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);
-  }
-  .cart-row-media{
-    width:64px; height:78px; background:var(--paper-2); border-radius:8px; border:1px solid var(--line);
-    overflow:hidden; flex-shrink:0;
-  }
-  .cart-row-media img{ width:100%; height:100%; object-fit:cover; }
-  .cart-row-info{ flex:1; display:flex; flex-direction:column; gap:4px; }
-  .cart-row-info .name{ font-family:'Playfair Display', serif; font-size:15px; }
-  .cart-row-info .meta{ font-size:12px; color:#7a7164; }
-  .cart-row-info .price{ font-family:'Space Mono', monospace; font-size:13px; margin-top:2px; }
-  .qty-ctrl{ display:flex; align-items:center; gap:10px; margin-top:6px; }
-  .qty-ctrl button{
-    width:22px; height:22px; border:1px solid var(--line-strong); background:#fff;
-    border-radius:5px; font-size:13px; display:flex; align-items:center; justify-content:center;
-  }
-  .qty-ctrl span{ font-family:'Space Mono', monospace; font-size:13px; min-width:14px; text-align:center; }
-  .remove-link{ font-size:11.5px; color:var(--gold-dark); text-decoration:underline; background:none; border:none; margin-top:2px; align-self:flex-start; }
-  .empty-cart{ text-align:center; padding:60px 20px; color:#8a8172; font-size:14px; }
-
-  .drawer-foot{ border-top:1px solid var(--line); padding:20px 24px 26px; background:#fff; }
-  .subtotal-row{ display:flex; justify-content:space-between; font-size:15px; margin-bottom:14px; }
-  .subtotal-row .amt{ font-family:'Space Mono', monospace; font-weight:700; }
-  .checkout-btn{
-    width:100%; padding:14px; border-radius:10px; background:var(--charcoal); color:#fff;
-    border:none; font-size:14.5px; letter-spacing:0.02em; transition:background .15s;
-  }
-  .checkout-btn:hover{ background:var(--gold-dark); }
-  .checkout-btn:disabled{ opacity:0.4; cursor:not-allowed; }
-
-  /* ---------- checkout modal ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(38,30,27,0.5); z-index:80;
-    display:none; align-items:center; justify-content:center; padding:20px;
-  }
-  .modal-overlay.show{ display:flex; }
-  .modal{
-    background:var(--bg-main); border-radius:16px; width:480px; max-width:100%;
-    max-height:88vh; overflow-y:auto; padding:32px; position:relative;
-  }
-  .modal h3{ font-size:24px; margin-bottom:6px; font-family:'Playfair Display', serif; }
-  .modal p.sub{ font-size:13.5px; color:#7a7164; margin-bottom:24px; }
-  .field{ margin-bottom:16px; }
-  .field label{ display:block; font-size:12.5px; letter-spacing:0.03em; margin-bottom:6px; color:#544c40; }
-  .field input, .field textarea, .field select{
-    width:100%; border:1px solid var(--line-strong); border-radius:99px; padding:11px 13px;
-    font-size:14px; font-family:'Work Sans', sans-serif; background:#fff; color:var(--charcoal);
-  }
-  .field textarea{ border-radius:12px; resize:vertical; min-height:64px; }
-  .field-error{ font-size:11.5px; color:var(--gold-dark); margin-top:4px; display:none; }
-  .field.error input, .field.error textarea, .field.error select{ border-color:var(--gold-dark); }
-  .field.error .field-error{ display:block; }
-  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .modal-close{ position:absolute; top:18px; right:18px; }
-
-  .success-view{ text-align:center; padding:10px 0 6px; }
-  .success-view .check{
-    width:56px; height:56px; border-radius:50%; background:var(--sage); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 18px;
-  }
-  .success-view h3{ margin-bottom:10px; }
-  .success-view p{ font-size:14px; color:#6b6255; margin-bottom:4px; }
-  .order-code{ font-family:'Space Mono', monospace; background:var(--paper-2); border-radius:8px; padding:10px; margin:18px 0; font-size:15px; letter-spacing:0.04em; }
-
-  @media(max-width:880px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero-art{ order:-1; max-width:100%; }
-    .hero-art img{ height:260px; }
-    .slide h1{ font-size:36px; }
-    nav.mainnav{ display:none; }
-    .grid{ grid-template-columns:repeat(2,1fr); }
-    .values .wrap{ grid-template-columns:1fr; }
-    .foot-grid{ flex-direction:column; }
-  }
-  @media(max-width:520px){
-    .wrap{ padding:0 18px; }
-    .grid{ grid-template-columns:1fr; }
-    .drawer{ width:100%; }
-    .chat-box{ right:15px; bottom:80px; width:calc(100vw - 30px); }
-  }
+@media(max-width:860px){
+  .bar nav{display:none}
+  .bar{grid-template-columns:1fr auto}
+  .logo{grid-column:1}
+  .about-grid,.store{grid-template-columns:1fr}
+  .stage-body{grid-template-columns:1fr;gap:24px;padding-bottom:60px}
+  .stage-img{width:min(100%,calc(60vh * .75))}
+  .track{gap:34px}
+}
+@media(max-width:520px){
+  .wrap{padding:0 18px}
+  .two{grid-template-columns:1fr}
+  .wa span{display:none}
+  .wa{padding:13px}
+  .modal{padding:24px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap headbar">
-    <div class="logo">BELLAVIE<span>.</span></div>
-    <nav class="mainnav">
-      <a href="#koleksi">New Arrivals</a>
-      <a href="#koleksi">Dress</a>
-      <a href="#koleksi">Atasan</a>
-      <a href="#koleksi">Bawahan</a>
+  <div class="wrap bar">
+    <nav class="up" aria-label="Navigasi utama">
+      <a href="#koleksi">Koleksi</a>
+      <a href="#ukuran">Ukuran</a>
+      <a href="#toko">Toko Medan</a>
+      <a href="#faq">FAQ</a>
     </nav>
-    <div class="head-actions">
-      <button class="cart-btn" id="cartOpenBtn">
-        Keranjang <span class="cart-count" id="cartCount">0</span>
-      </button>
+    <a class="logo" href="#" aria-label="BELLAVIE beranda">BELLAVIE<i>.</i></a>
+    <div class="right">
+      <button class="cart-btn up" id="openCart" aria-label="Buka keranjang">Keranjang <b id="cartCount">0</b></button>
     </div>
   </div>
 </header>
 
-<!-- Banner Hero Slider Section (4 Slides) -->
-<section class="hero-slider-section">
-  <button class="slider-btn prev" id="slidePrev">❮</button>
-  <button class="slider-btn next" id="slideNext">❯</button>
-  
-  <div class="slider-container" id="heroSlider">
-    
-    <!-- Slide 1 -->
-    <div class="slide">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Exquisite Collection — 2026</div>
-          <h1>Elegance in <em>every</em> detail of your dress.</h1>
-          <p class="lede">Koleksi pakaian wanita eksklusif dengan pilihan bahan premium, potongan modern, dan kenyamanan istimewa.</p>
-          <div class="hero-ctas">
-            <a href="#koleksi" class="btn btn-solid">Jelajahi Koleksi</a>
-            <a href="#tentang" class="btn">Tentang BELLAVIE</a>
-          </div>
-        </div>
-        <div class="hero-art">
-          <span class="swatch-tag">Silk & Rayon Premium</span>
-          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800" alt="BELLAVIE Banner 1">
-        </div>
-      </div>
-    </div>
+<main>
+  <section class="intro wrap" id="koleksi">
+    <p class="tag up">Koleksi 2026 · Dari Medan untuk Indonesia</p>
+    <h1 class="serif">Pilih dari <em>rak</em> kami.</h1>
+    <div class="filters" id="filters" role="tablist" aria-label="Kategori"></div>
+  </section>
 
-    <!-- Slide 2 -->
-    <div class="slide">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">New Arrival Season</div>
-          <h1>Graceful <em>Silk</em> Evening Wear.</h1>
-          <p class="lede">Hadirkan kilau mewah dan tekstur selembut sutra untuk penampilan terbaik di setiap acara formal Anda.</p>
-          <div class="hero-ctas">
-            <a href="#koleksi" class="btn btn-solid">Lihat Silk Series</a>
-          </div>
-        </div>
-        <div class="hero-art">
-          <span class="swatch-tag">Pure Silk Touch</span>
-          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800" alt="BELLAVIE Banner 2">
-        </div>
-      </div>
+  <div class="rack">
+    <div class="scroller" id="scroller"><div class="track" id="track"></div></div>
+    <div class="rack-nav">
+      <button id="rackPrev" aria-label="Geser kiri">←</button>
+      <button id="rackNext" aria-label="Geser kanan">→</button>
     </div>
-
-    <!-- Slide 3 -->
-    <div class="slide">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Minimalist Casual</div>
-          <h1>Effortless <em>Linen & Rayon</em> Style.</h1>
-          <p class="lede">Desain kasual nan elegan yang memberikan kenyamanan maksimal untuk aktivitas harian Anda.</p>
-          <div class="hero-ctas">
-            <a href="#koleksi" class="btn btn-solid">Beli Kasual</a>
-          </div>
-        </div>
-        <div class="hero-art">
-          <span class="swatch-tag">Breathable Linen</span>
-          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800" alt="BELLAVIE Banner 3">
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 4 -->
-    <div class="slide">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Special Offer</div>
-          <h1>Exclusive <em>Discounts</em> This Week.</h1>
-          <p class="lede">Dapatkan voucher promo khusus pembelian pertama untuk seluruh koleksi pilihan minggu ini.</p>
-          <div class="hero-ctas">
-            <a href="#koleksi" class="btn btn-solid">Klaim Promo</a>
-          </div>
-        </div>
-        <div class="hero-art">
-          <span class="swatch-tag">Diskon s/d 20%</span>
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800" alt="BELLAVIE Banner 4">
-        </div>
-      </div>
-    </div>
-
+    <p class="hint">Geser rak, lalu klik baju untuk melihat detail</p>
   </div>
 
-  <div class="slider-dots" id="sliderDots"></div>
-</section>
+  <section class="block wrap">
+    <div class="sec-head">
+      <h2 class="serif">Kenapa <em>BELLAVIE</em></h2>
+      <p>Busana wanita dengan potongan modern, dibuat nyaman dipakai seharian.</p>
+    </div>
+    <div class="about-grid">
+      <div class="tile"><small class="up">01</small><div><h3 class="serif">Bahan adem & jatuh</h3><p>Pilihan silk, linen, dan rayon yang nyaman untuk cuaca Indonesia.</p></div></div>
+      <div class="tile"><small class="up">02</small><div><h3 class="serif">Edisi terbatas</h3><p>Setiap seri dibuat dalam jumlah terbatas agar tampilanmu tetap eksklusif.</p></div></div>
+      <div class="tile"><small class="up">03</small><div><h3 class="serif">Ukuran jelas</h3><p>Size chart lengkap S sampai XL, plus tukar size 3 hari jika kurang pas.</p></div></div>
+    </div>
+  </section>
 
-<div class="stripe">
-  <div class="wrap">
-    <div class="stripe-item">✨ <b>Garansi</b> Tukar Size 3 Hari</div>
-    <div class="stripe-item">↺ <b>Bahan</b> Silk & Katun Premium</div>
-    <div class="stripe-item">🚚 <b>Pengiriman</b> Instant & Reguler</div>
-    <div class="stripe-item">💬 <b>Fashion Advisor</b> Online 24/7</div>
-  </div>
-</div>
+  <section class="block wrap" id="ukuran">
+    <div class="sec-head">
+      <h2 class="serif">Panduan <em>ukuran</em></h2>
+      <p>Acuan berat badan dan lingkar dada. Ragu di antara dua ukuran? Pilih yang lebih besar.</p>
+    </div>
+    <div class="size-wrap">
+      <table>
+        <thead><tr><th>Ukuran</th><th>Berat badan</th><th>Lingkar dada</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>42 – 48 kg</td><td>88 cm</td></tr>
+          <tr><td>M</td><td>49 – 56 kg</td><td>94 cm</td></tr>
+          <tr><td>L</td><td>57 – 65 kg</td><td>100 cm</td></tr>
+          <tr><td>XL</td><td>66 – 75 kg</td><td>108 cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-<section class="collection" id="koleksi">
-  <div class="wrap">
-    <div class="coll-head">
-      <div>
-        <h2>Koleksi BELLAVIE</h2>
-        <p>Setiap potongan dirancang khusus untuk memancarkan keanggunan. Pilih ukuran dan pesan sekarang.</p>
+  <section class="block wrap" id="toko">
+    <div class="sec-head">
+      <h2 class="serif">Toko di <em>Medan</em></h2>
+      <p>Pengiriman cepat di dalam kota Medan, dan ekspedisi ke seluruh Indonesia.</p>
+    </div>
+    <div class="store">
+      <div class="info">
+        <h3 class="serif">BELLAVIE<br>Medan</h3>
+        <dl>
+          <dt>Alamat</dt><dd id="infoAddr"></dd>
+        </dl>
+        <dl><dt>Jam buka</dt><dd id="infoHours"></dd></dl>
+        <dl><dt>Pengiriman Medan</dt><dd>Kurir instan (ongkir dihitung via WhatsApp) atau ambil di toko.</dd></dl>
+        <a class="btn lime" id="infoWa" target="_blank" rel="noopener">Chat WhatsApp</a>
       </div>
+      <iframe title="Peta Medan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Medan,+Sumatera+Utara&output=embed"></iframe>
     </div>
-    <div class="filters" id="filters"></div>
-    <div class="grid" id="productGrid"></div>
-  </div>
-</section>
+  </section>
 
-<section class="values" id="tentang">
-  <div class="wrap">
-    <div class="value-item">
-      <div class="num">01</div>
-      <h3>Material Premium</h3>
-      <p>Menggunakan Silk, Linen, dan Rayon Uniqlo pilihan yang sejuk dan memberikan drape indah pada tubuh.</p>
-    </div>
-    <div class="value-item">
-      <div class="num">02</div>
-      <h3>Limited Design</h3>
-      <p>Setiap seri diproduksi secara terbatas untuk menjaga keeksklusifan gaya busana Anda.</p>
-    </div>
-    <div class="value-item">
-      <div class="num">03</div>
-      <h3>Presisi Ukuran</h3>
-      <p>Size chart yang dirancang cermat untuk memastikan kenyamanan sempurna dari Size S hingga XL.</p>
-    </div>
-  </div>
-</section>
+  <section class="block wrap" id="faq">
+    <div class="sec-head"><h2 class="serif">Pertanyaan <em>umum</em></h2></div>
+    <details><summary>Bagaimana cara memesan?</summary><p>Pilih baju, pilih ukuran, masukkan ke keranjang, lalu isi data pengiriman. Pesananmu akan terkirim ke WhatsApp kami untuk konfirmasi pembayaran dan ongkir.</p></details>
+    <details><summary>Bisa tukar ukuran?</summary><p>Bisa. Tukar ukuran maksimal 3 hari setelah barang diterima, selama barang belum dipakai dan label masih ada. Mohon sertakan video unboxing.</p></details>
+    <details><summary>Pembayaran apa saja yang tersedia?</summary><p>Transfer bank, dan COD khusus area Medan. Detail rekening dikirim lewat WhatsApp setelah pesanan dikonfirmasi.</p></details>
+    <details><summary>Berapa lama pengiriman?</summary><p>Dalam kota Medan bisa di hari yang sama dengan kurir instan. Luar kota memakai ekspedisi reguler, biasanya 2–6 hari kerja tergantung tujuan.</p></details>
+  </section>
+</main>
 
-<footer id="kontak">
+<footer>
   <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="logo">BELLAVIE<span>.</span></div>
-        <p>Butik busana wanita modern dengan desain elegan dan bahan kelas atas. Dikirim ke seluruh Indonesia.</p>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h4>Belanja</h4>
-          <a href="#koleksi">Semua Produk</a>
-          <a href="#koleksi">Dress</a>
-          <a href="#koleksi">Atasan</a>
-          <a href="#koleksi">Bawahan</a>
-        </div>
-        <div class="foot-col">
-          <h4>Bantuan</h4>
-          <a href="#">Panduan Ukuran</a>
-          <a href="#">Kebijakan Retur</a>
-          <a href="#">Lacak Pesanan</a>
-        </div>
-        <div class="foot-col">
-          <h4>Hubungi</h4>
-          <a href="mailto:support@bellavie.co.id">support@bellavie.co.id</a>
-          <a href="#">Instagram @bellavie.id</a>
-          <a href="#">WhatsApp Official</a>
-        </div>
-      </div>
+    <div class="foot">
+      <div><a class="logo" href="#">BELLAVIE<i>.</i></a><p>Butik busana wanita modern dari Medan. Dikirim ke seluruh Indonesia.</p></div>
+      <div><h4>Belanja</h4><a href="#koleksi">Koleksi</a><a href="#ukuran">Panduan ukuran</a><a href="#faq">FAQ</a></div>
+      <div><h4>Hubungi</h4><a id="ftWa" target="_blank" rel="noopener">WhatsApp</a><a id="ftIg" target="_blank" rel="noopener">Instagram</a><a id="ftMail"></a></div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 BELLAVIE Women's Fashion</span>
-      <span>Luxury & Elegance</span>
-    </div>
+    <p class="copy">© 2026 BELLAVIE · Medan, Sumatera Utara</p>
   </div>
 </footer>
 
-<!-- Floating AI Chatbot Widget -->
-<button class="chat-widget-btn" id="chatWidgetBtn">
-  💬 Chat CS BELLAVIE
-</button>
+<a class="wa" id="waFloat" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.100-.2.200-.6.800-.8 1-.1.200-.3.200-.5.100-1.500-.7-2.400-1.300-3.400-2.900-.3-.5.300-.5.800-1.500.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.2.300-.9.900-.9 2.200s.9 2.500 1.100 2.700c.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.8 3.100.7.500-.1 1.500-.6 1.700-1.200.2-.6.200-1.100.2-1.200-.1-.1-.3-.2-.5-.3z"/></svg>
+  <span>Chat kami</span>
+</a>
 
-<div class="chat-box" id="chatBox">
-  <div class="chat-head">
-    <div>
-      <div class="chat-head-title">BELLAVIE AI Advisor</div>
-      <span class="chat-head-sub">● Aira Online</span>
-    </div>
-    <button class="icon-btn" id="chatCloseBtn" style="color:#fff;">✕</button>
+<div class="ticker" aria-hidden="true"><div class="move" id="tickerMove"></div></div>
+
+<!-- Product stage -->
+<div class="stage" id="stage" role="dialog" aria-modal="true" aria-label="Detail produk">
+  <div class="stage-top">
+    <span class="count up" id="stCount"></span>
+    <button class="close" id="stClose" aria-label="Tutup">✕</button>
   </div>
-  <div class="chat-body" id="chatBody">
-    <div class="msg-bubble bot">
-      Selamat datang di BELLAVIE Women's Fashion! ✨ Ada yang bisa Aira bantu mengenai rekomendasi ukuran, bahan, atau koleksi produk hari ini, Sis?
+  <div class="stage-body">
+    <div class="stage-img">
+      <button class="arrow l" id="stPrev" aria-label="Produk sebelumnya">←</button>
+      <img id="stImg" alt="">
+      <button class="arrow r" id="stNext" aria-label="Produk berikutnya">→</button>
+    </div>
+    <div class="stage-info">
+      <p class="cat up" id="stCat"></p>
+      <h2 id="stName"></h2>
+      <p class="price" id="stPrice"></p>
+      <div class="lbl up"><span>Tampilan</span></div>
+      <div class="pills" id="stViews"></div>
+      <div class="lbl up"><span>Ukuran</span><button id="stSizeGuide">Panduan ukuran</button></div>
+      <div class="pills" id="stSizes"></div>
+      <button class="btn solid full" id="stAdd">Tambah ke keranjang</button>
+      <p class="stock" id="stStock"></p>
     </div>
   </div>
-  <form class="chat-foot" id="chatForm">
-    <input type="text" id="chatInput" placeholder="Tanya tentang stok, size chart..." required />
-    <button type="submit">Kirim</button>
-  </form>
 </div>
 
-<!-- Cart Drawer -->
+<!-- Cart -->
 <div class="overlay" id="overlay"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-head">
-    <h3>Keranjang Belanja</h3>
-    <button class="icon-btn" id="drawerCloseBtn">✕</button>
+<aside class="drawer" id="drawer" aria-label="Keranjang belanja">
+  <div class="d-head"><h3 class="serif">Keranjang</h3><button class="close" id="closeCart" aria-label="Tutup keranjang">✕</button></div>
+  <div class="d-items" id="dItems"></div>
+  <div class="d-foot">
+    <div class="sub"><span>Subtotal</span><span id="subTotal">Rp 0</span></div>
+    <p class="note">Ongkos kirim dihitung setelah alamat dikonfirmasi lewat WhatsApp.</p>
+    <button class="btn solid full" id="checkoutBtn" disabled>Checkout</button>
   </div>
-  <div class="drawer-items" id="drawerItems"></div>
-  <div class="drawer-foot">
-    <div class="subtotal-row">
-      <span>Subtotal</span>
-      <span class="amt" id="subtotalAmt">Rp 0</span>
-    </div>
-    <button class="checkout-btn" id="checkoutBtn" disabled>Checkout Pesanan</button>
-  </div>
-</div>
+</aside>
 
-<!-- Checkout Modal -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modalBox"></div>
-</div>
+<div class="modal-wrap" id="modalWrap"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
+/* =====================================================
+   PENGATURAN — ubah bagian ini saja sesuai toko kamu
+   ===================================================== */
+const CONFIG = {
+  WA_NUMBER: '6281234567890',          // nomor WhatsApp toko, format 62xxxxxxxxxx (tanpa + dan 0 di depan)
+  INSTAGRAM: 'bellavie.id',            // username Instagram tanpa @
+  EMAIL: 'support@bellavie.co.id',
+  ADDRESS: 'Jl. (isi alamat toko), Kec. (isi), Medan, Sumatera Utara',
+  HOURS: 'Senin – Sabtu, 10.00 – 20.00 WIB',
+  SUPABASE_URL: 'https://arvdqtpsxpgjhqawdrhz.supabase.co',
+  SUPABASE_KEY: 'sb_publishable_6JFrhtKfnoVTXrtogmBJjQ_miEojHfE',
+  SIZES: ['S','M','L','XL'],
+  TICKER: ['Gratis tukar size 3 hari','Kirim ke seluruh Indonesia','Kurir instan Medan','COD area Medan','Koleksi terbatas 2026','Made in Medan']
+};
 const CATS = [
-  {id:'semua', label:'Semua'},
-  {id:'dress', label:'Dress'},
-  {id:'atasan', label:'Atasan'},
-  {id:'bawahan', label:'Bawahan'},
-  {id:'outer', label:'Outer'}
+  {id:'semua',label:'Semua'},{id:'dress',label:'Dress'},{id:'atasan',label:'Atasan'},
+  {id:'bawahan',label:'Bawahan'},{id:'outer',label:'Outer'}
 ];
+const MEDAN_AREAS = ['Medan Amplas','Medan Area','Medan Barat','Medan Baru','Medan Belawan','Medan Deli','Medan Denai','Medan Helvetia','Medan Johor','Medan Kota','Medan Labuhan','Medan Maimun','Medan Marelan','Medan Perjuangan','Medan Petisah','Medan Polonia','Medan Selayang','Medan Sunggal','Medan Tembung','Medan Timur','Medan Tuntungan'];
+const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="600" height="800" fill="#dedcd6"/><text x="300" y="410" font-family="serif" font-size="46" font-style="italic" text-anchor="middle" fill="#8a8880">BELLAVIE</text></svg>');
 
-/* ---------- Koneksi Supabase: produk diambil dari database, bukan data contoh lagi ---------- */
-const SUPABASE_URL = 'https://arvdqtpsxpgjhqawdrhz.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_6JFrhtKfnoVTXrtogmBJjQ_miEojHfE';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rupiah = n => 'Rp ' + Number(n || 0).toLocaleString('id-ID');
+const safeUrl = u => /^https?:\/\//i.test(u || '') || /^data:image\//i.test(u || '') ? u : FALLBACK_IMG;
+const waLink = (text) => `https://wa.me/${CONFIG.WA_NUMBER}` + (text ? `?text=${encodeURIComponent(text)}` : '');
+let toastTimer;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 2200); }
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
 
-const FALLBACK_IMG = 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=600';
+/* ---------- static fill ---------- */
+$('#infoAddr').textContent = CONFIG.ADDRESS;
+$('#infoHours').textContent = CONFIG.HOURS;
+['#infoWa','#ftWa','#waFloat'].forEach(s => $(s).href = waLink('Halo BELLAVIE, saya mau tanya produk.'));
+$('#ftIg').href = 'https://instagram.com/' + CONFIG.INSTAGRAM; $('#ftIg').textContent = '@' + CONFIG.INSTAGRAM;
+$('#ftMail').href = 'mailto:' + CONFIG.EMAIL; $('#ftMail').textContent = CONFIG.EMAIL;
+(function(){
+  const one = CONFIG.TICKER.map(t => `<span>${esc(t)}</span><span>✦</span>`).join('');
+  $('#tickerMove').innerHTML = one + one + one + one;
+})();
+
+/* ---------- data (Supabase) ---------- */
+const SB_HEADERS = { apikey: CONFIG.SUPABASE_KEY, 'Content-Type': 'application/json' };
+const sbUrl = path => CONFIG.SUPABASE_URL + '/rest/v1/' + path;
 let PRODUCTS = [];
+let activeCat = 'semua';
 
 async function fetchProducts(){
-  const { data, error } = await sb.from('products').select('*').order('created_at', { ascending: false });
-  if(error){
-    console.error('Gagal memuat produk dari Supabase:', error.message);
-    return;
+  renderSkeleton();
+  try{
+    const res = await fetch(sbUrl('products?select=*&order=created_at.desc'), { headers: SB_HEADERS });
+    if(!res.ok) throw new Error('HTTP ' + res.status + ' ' + (await res.text()));
+    const data = await res.json();
+    PRODUCTS = (data || []).map(p => ({
+      id: String(p.id), name: p.name || 'Tanpa nama', cat: String(p.category || '').toLowerCase(),
+      price: Number(p.price) || 0, stock: (typeof p.stock === 'number') ? p.stock : null,
+      images: (Array.isArray(p.images) && p.images.length) ? p.images.map(safeUrl) : [FALLBACK_IMG]
+    }));
+    cart = cart.filter(i => PRODUCTS.some(p => p.id === i.id));
+    renderCart();
+    renderRack();
+  }catch(err){
+    console.error(err);
+    renderError('Produk belum bisa dimuat. Cek koneksi atau pengaturan Supabase (lihat Console).');
   }
-  PRODUCTS = (data || []).map(p => ({
-    id: p.id,
-    name: p.name,
-    cat: p.category,
-    price: p.price,
-    stock: p.stock,
-    sizes: ['S','M','L','XL'],
-    isNew: false,
-    images: (p.images && p.images.length > 0) ? p.images : [FALLBACK_IMG]
-  }));
-  renderProducts();
 }
 
-/* ---------- Hero Banner Slider Script ---------- */
-const heroSlider = document.getElementById('heroSlider');
-const slides = document.querySelectorAll('.slide');
-const sliderDots = document.getElementById('sliderDots');
-let currentSlide = 0;
-let slideInterval;
+/* ---------- rack ---------- */
+const HANGER = '<svg class="hanger" viewBox="0 0 54 40" fill="none" stroke="#0f0f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M27 2.500c-3 0-5 2-5 4.500 0 2 1.500 3 3 4l2 2"/><path d="M27 13 4 32c-1.300 1 -.600 3 1 3h44c1.600 0 2.300-2 1-3L27 13z" fill="#e8e7e3"/></svg>';
+const track = $('#track'), scroller = $('#scroller');
 
-slides.forEach((_, idx) => {
-  const dot = document.createElement('div');
-  dot.className = 'dot' + (idx === 0 ? ' active' : '');
-  dot.addEventListener('click', () => goToSlide(idx));
-  sliderDots.appendChild(dot);
+function renderSkeleton(){
+  track.innerHTML = Array.from({length:6}).map(() => `<div class="hang skeleton">${HANGER}<span class="swing"><span class="frame"></span></span></div>`).join('');
+}
+function renderError(msg){
+  track.innerHTML = `<div class="state"><p>${esc(msg)}</p><button class="btn" id="retry">Coba lagi</button></div>`;
+  $('#retry').addEventListener('click', fetchProducts);
+}
+function currentList(){ return activeCat === 'semua' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCat); }
+function renderRack(){
+  const list = currentList();
+  scroller.scrollTo({left:0});
+  if(!list.length){ track.innerHTML = '<div class="state"><p>Belum ada produk di kategori ini.</p></div>'; return; }
+  track.innerHTML = list.map(p => {
+    const out = p.stock !== null && p.stock <= 0;
+    return `<button class="hang" data-id="${esc(p.id)}" aria-label="Lihat ${esc(p.name)}">
+      ${HANGER}
+      <span class="swing">
+        <span class="frame">${out ? '<span class="tagbadge up">Habis</span>' : ''}<img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy" draggable="false" onerror="this.src='${FALLBACK_IMG.replace(/'/g,"\\'")}'"></span>
+        <span class="h-name">${esc(p.name)}</span>
+        <span class="h-price">${rupiah(p.price)}</span>
+      </span>
+    </button>`;
+  }).join('');
+}
+const filtersEl = $('#filters');
+filtersEl.innerHTML = CATS.map(c => `<button class="chip up ${c.id===activeCat?'on':''}" data-cat="${c.id}">${c.label}</button>`).join('');
+filtersEl.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if(!b) return;
+  activeCat = b.dataset.cat;
+  filtersEl.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b));
+  renderRack();
 });
 
-function updateSlider() {
-  heroSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
-  document.querySelectorAll('.dot').forEach((dot, idx) => {
-    dot.classList.toggle('active', idx === currentSlide);
+/* drag to scroll */
+(function(){
+  let down = false, startX = 0, startL = 0, moved = false;
+  scroller.addEventListener('pointerdown', e => {
+    if(e.pointerType === 'touch') return;
+    down = true; moved = false; startX = e.clientX; startL = scroller.scrollLeft;
   });
-}
-
-function goToSlide(index) {
-  currentSlide = index;
-  updateSlider();
-  resetAutoSlide();
-}
-
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  updateSlider();
-}
-
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  updateSlider();
-}
-
-document.getElementById('slideNext').addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-document.getElementById('slidePrev').addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-
-function startAutoSlide() {
-  slideInterval = setInterval(nextSlide, 4500);
-}
-function resetAutoSlide() {
-  clearInterval(slideInterval);
-  startAutoSlide();
-}
-startAutoSlide();
-
-/* ---------- Render Products & Image Thumbnails ---------- */
-let activeCat = 'semua';
-let cart = [];
-
-function rupiah(n){ return 'Rp ' + n.toLocaleString('id-ID'); }
-
-const filtersEl = document.getElementById('filters');
-CATS.forEach(c=>{
-  const btn = document.createElement('button');
-  btn.className = 'filter-chip' + (c.id===activeCat ? ' active':'');
-  btn.textContent = c.label;
-  btn.addEventListener('click', ()=>{
-    activeCat = c.id;
-    document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProducts();
+  window.addEventListener('pointermove', e => {
+    if(!down) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 5){ moved = true; scroller.classList.add('drag'); }
+    scroller.scrollLeft = startL - dx;
   });
-  filtersEl.appendChild(btn);
+  window.addEventListener('pointerup', () => { down = false; scroller.classList.remove('drag'); });
+  scroller.addEventListener('click', e => {
+    if(moved){ e.preventDefault(); e.stopPropagation(); moved = false; return; }
+    const b = e.target.closest('.hang[data-id]');
+    if(b) openStage(b.dataset.id);
+  }, true);
+  const step = () => Math.max(240, scroller.clientWidth * .7);
+  $('#rackPrev').addEventListener('click', () => scroller.scrollBy({left:-step(), behavior:'smooth'}));
+  $('#rackNext').addEventListener('click', () => scroller.scrollBy({left: step(), behavior:'smooth'}));
+})();
+
+/* ---------- product stage ---------- */
+const stage = $('#stage');
+let st = { list:[], idx:0, view:0, size:null };
+
+function openStage(id){
+  st.list = currentList();
+  st.idx = Math.max(0, st.list.findIndex(p => p.id === id));
+  st.view = 0; st.size = null;
+  stage.classList.add('show'); document.body.style.overflow = 'hidden';
+  stage.scrollTop = 0;
+  renderStage();
+  $('#stClose').focus();
+}
+function closeStage(){ stage.classList.remove('show'); document.body.style.overflow = ''; }
+function stageProduct(){ return st.list[st.idx]; }
+function renderStage(){
+  const p = stageProduct(); if(!p) return;
+  const out = p.stock !== null && p.stock <= 0;
+  $('#stCount').textContent = String(st.idx + 1).padStart(2,'0') + ' / ' + String(st.list.length).padStart(2,'0');
+  $('#stCat').textContent = p.cat || 'Koleksi';
+  $('#stName').textContent = p.name;
+  $('#stPrice').textContent = rupiah(p.price);
+  const img = $('#stImg'); img.src = p.images[st.view] || p.images[0]; img.alt = p.name;
+  img.onerror = () => { img.src = FALLBACK_IMG; };
+  const labels = ['DEPAN','BELAKANG'];
+  $('#stViews').innerHTML = p.images.map((_, i) =>
+    `<button class="pill ${i===st.view?'on':''}" data-view="${i}">${p.images.length <= 2 ? labels[i] : 'FOTO ' + (i+1)}</button>`).join('');
+  $('#stSizes').innerHTML = CONFIG.SIZES.map(s =>
+    `<button class="pill ${st.size===s?'on':''} ${out?'off':''}" data-size="${s}">${s}</button>`).join('');
+  const add = $('#stAdd');
+  add.disabled = out; add.textContent = out ? 'Stok habis' : 'Tambah ke keranjang';
+  $('#stStock').textContent = out ? '' : (p.stock !== null && p.stock <= 5 ? `Sisa ${p.stock} pcs` : '');
+  $('#stPrev').style.display = $('#stNext').style.display = st.list.length > 1 ? '' : 'none';
+}
+function stageGo(d){ st.idx = (st.idx + d + st.list.length) % st.list.length; st.view = 0; st.size = null; renderStage(); }
+$('#stClose').addEventListener('click', closeStage);
+$('#stPrev').addEventListener('click', () => stageGo(-1));
+$('#stNext').addEventListener('click', () => stageGo(1));
+$('#stViews').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if(!b) return; st.view = +b.dataset.view; renderStage(); });
+$('#stSizes').addEventListener('click', e => { const b = e.target.closest('[data-size]'); if(!b) return; st.size = b.dataset.size; renderStage(); });
+$('#stSizeGuide').addEventListener('click', () => { closeStage(); location.hash = '#ukuran'; });
+$('#stAdd').addEventListener('click', () => {
+  if(!st.size){ toast('Pilih ukuran dulu ya'); return; }
+  const p = stageProduct();
+  if(addToCart(p.id, st.size)){ toast('Ditambahkan ke keranjang'); }
 });
 
-const gridEl = document.getElementById('productGrid');
-function renderProducts(){
-  gridEl.innerHTML = '';
-  const list = activeCat==='semua' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
-
-  if(list.length === 0){
-    gridEl.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#6b6255; padding:40px 0;">Belum ada produk di kategori ini.</p>';
-    return;
-  }
-
-  list.forEach(p=>{
-    const outOfStock = typeof p.stock === 'number' && p.stock <= 0;
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="card-media">
-        ${p.isNew ? '<span class="badge-new">New</span>' : ''}
-        ${outOfStock ? '<span class="badge-new" style="background:#8a8a8a;">Stok Habis</span>' : ''}
-        <img src="${p.images[0]}" alt="${p.name}" class="main-img" id="img-${p.id}">
-        <div class="card-thumbs">
-          ${p.images.map((img, idx) => `
-            <div class="thumb-item ${idx===0?'active':''}" onclick="switchProductImg('${p.id}', '${img}', this)">
-              <img src="${img}" alt="thumb">
-            </div>
-          `).join('')}
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">${p.cat}</div>
-        <div class="card-name">${p.name}</div>
-        <div class="card-price">${rupiah(p.price)}</div>
-        <div class="card-foot">
-          <select class="size-select" data-id="${p.id}">
-            ${p.sizes.map(s=>`<option value="${s}">Size ${s}</option>`).join('')}
-          </select>
-          <button class="add-btn" data-id="${p.id}" ${outOfStock ? 'disabled' : ''}>${outOfStock ? 'Habis' : '+ Keranjang'}</button>
-        </div>
-      </div>
-    `;
-    gridEl.appendChild(card);
-  });
-
-  gridEl.querySelectorAll('.add-btn:not([disabled])').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const id = btn.dataset.id;
-      const sizeSelect = gridEl.querySelector(`.size-select[data-id="${id}"]`);
-      addToCart(id, sizeSelect.value);
-      btn.textContent = 'Ditambahkan ✓';
-      btn.classList.add('added');
-      setTimeout(()=>{ btn.textContent = '+ Keranjang'; btn.classList.remove('added'); }, 1100);
-    });
-  });
-}
-
-function switchProductImg(productId, imgUrl, thumbEl) {
-  const mainImg = document.getElementById(`img-${productId}`);
-  if(mainImg) mainImg.src = imgUrl;
-  const parent = thumbEl.parentElement;
-  parent.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-  thumbEl.classList.add('active');
-}
-
-fetchProducts();
-
-/* ---------- Cart Logic ---------- */
+/* ---------- cart ---------- */
+let cart = store.get('bv_cart', []);
+if(!Array.isArray(cart)) cart = [];
+function saveCart(){ store.set('bv_cart', cart.map(({id,size,qty}) => ({id,size,qty}))); }
+const productById = id => PRODUCTS.find(p => p.id === id);
 function addToCart(id, size){
-  const product = PRODUCTS.find(p=>p.id===id);
-  const existing = cart.find(item=>item.id===id && item.size===size);
-  if(existing){
-    existing.qty += 1;
-  } else {
-    cart.push({id, size, qty:1, name:product.name, price:product.price, img:product.images[0]});
-  }
+  const p = productById(id); if(!p) return false;
+  const ex = cart.find(i => i.id === id && i.size === size);
+  const inCart = cart.filter(i => i.id === id).reduce((s,i) => s + i.qty, 0);
+  if(p.stock !== null && inCart >= p.stock){ toast('Stok tidak mencukupi'); return false; }
+  if(ex) ex.qty++; else cart.push({id, size, qty:1});
+  renderCart(); return true;
+}
+function changeQty(id, size, d){
+  const it = cart.find(i => i.id === id && i.size === size); if(!it) return;
+  const p = productById(id);
+  const inCart = cart.filter(i => i.id === id).reduce((s,i) => s + i.qty, 0);
+  if(d > 0 && p && p.stock !== null && inCart >= p.stock){ toast('Stok tidak mencukupi'); return; }
+  it.qty += d;
+  if(it.qty <= 0) cart = cart.filter(i => i !== it);
   renderCart();
 }
-function changeQty(id, size, delta){
-  const item = cart.find(i=>i.id===id && i.size===size);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty <= 0){
-    cart = cart.filter(i=>!(i.id===id && i.size===size));
-  }
-  renderCart();
-}
-function removeFromCart(id, size){
-  cart = cart.filter(i=>!(i.id===id && i.size===size));
-  renderCart();
-}
-function cartTotal(){ return cart.reduce((sum,i)=>sum + i.price*i.qty, 0); }
-function cartCount(){ return cart.reduce((sum,i)=>sum + i.qty, 0); }
-
-const drawerItemsEl = document.getElementById('drawerItems');
-const cartCountEl = document.getElementById('cartCount');
-const subtotalAmtEl = document.getElementById('subtotalAmt');
-const checkoutBtn = document.getElementById('checkoutBtn');
+const cartLines = () => cart.map(i => ({...i, p: productById(i.id)})).filter(l => l.p);
+const cartTotal = () => cartLines().reduce((s,l) => s + l.p.price * l.qty, 0);
+const cartCount = () => cart.reduce((s,i) => s + i.qty, 0);
 
 function renderCart(){
-  cartCountEl.textContent = cartCount();
-  subtotalAmtEl.textContent = rupiah(cartTotal());
-  checkoutBtn.disabled = cart.length === 0;
-
-  if(cart.length === 0){
-    drawerItemsEl.innerHTML = `<div class="empty-cart">Keranjang belanja Anda masih kosong.</div>`;
-    return;
-  }
-
-  drawerItemsEl.innerHTML = cart.map(item=>`
-    <div class="cart-row">
-      <div class="cart-row-media"><img src="${item.img}" alt="${item.name}"></div>
-      <div class="cart-row-info">
-        <div class="name">${item.name}</div>
-        <div class="meta">Ukuran: ${item.size}</div>
-        <div class="price">${rupiah(item.price * item.qty)}</div>
-        <div class="qty-ctrl">
-          <button data-act="dec" data-id="${item.id}" data-size="${item.size}">−</button>
-          <span>${item.qty}</span>
-          <button data-act="inc" data-id="${item.id}" data-size="${item.size}">+</button>
+  saveCart();
+  $('#cartCount').textContent = cartCount();
+  $('#subTotal').textContent = rupiah(cartTotal());
+  $('#checkoutBtn').disabled = cartLines().length === 0;
+  const lines = cartLines();
+  $('#dItems').innerHTML = lines.length ? lines.map(l => `
+    <div class="row">
+      <div class="th"><img src="${esc(l.p.images[0])}" alt="${esc(l.p.name)}"></div>
+      <div class="in">
+        <div class="nm">${esc(l.p.name)}</div>
+        <div class="mt">Ukuran ${esc(l.size)}</div>
+        <div class="mt">${rupiah(l.p.price * l.qty)}</div>
+        <div class="qty">
+          <button data-a="dec" data-id="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Kurangi">−</button>
+          <span>${l.qty}</span>
+          <button data-a="inc" data-id="${esc(l.id)}" data-size="${esc(l.size)}" aria-label="Tambah">+</button>
         </div>
-        <button class="remove-link" data-act="remove" data-id="${item.id}" data-size="${item.size}">Hapus</button>
+        <button class="rm" data-a="rm" data-id="${esc(l.id)}" data-size="${esc(l.size)}">Hapus</button>
       </div>
-    </div>
-  `).join('');
-
-  drawerItemsEl.querySelectorAll('button[data-act]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const {act, id, size} = btn.dataset;
-      if(act==='inc') changeQty(id, size, 1);
-      if(act==='dec') changeQty(id, size, -1);
-      if(act==='remove') removeFromCart(id, size);
-    });
-  });
+    </div>`).join('') : '<div class="empty">Keranjangmu masih kosong.</div>';
 }
-renderCart();
+$('#dItems').addEventListener('click', e => {
+  const b = e.target.closest('[data-a]'); if(!b) return;
+  const {a,id,size} = b.dataset;
+  if(a === 'inc') changeQty(id, size, 1);
+  if(a === 'dec') changeQty(id, size, -1);
+  if(a === 'rm'){ cart = cart.filter(i => !(i.id === id && i.size === size)); renderCart(); }
+});
+const overlay = $('#overlay'), drawer = $('#drawer');
+function openCart(){ overlay.classList.add('show'); drawer.classList.add('show'); }
+function closeCart(){ overlay.classList.remove('show'); drawer.classList.remove('show'); }
+$('#openCart').addEventListener('click', openCart);
+$('#closeCart').addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
 
-/* ---------- Drawer Controls ---------- */
-const overlay = document.getElementById('overlay');
-const drawer = document.getElementById('drawer');
-function openDrawer(){ overlay.classList.add('show'); drawer.classList.add('show'); }
-function closeDrawer(){ overlay.classList.remove('show'); drawer.classList.remove('show'); }
-document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
-document.getElementById('drawerCloseBtn').addEventListener('click', closeDrawer);
-overlay.addEventListener('click', ()=>{ closeDrawer(); closeModal(); });
+/* ---------- checkout ---------- */
+const modalWrap = $('#modalWrap'), modal = $('#modal');
+function openModal(html){ modal.innerHTML = html; modalWrap.classList.add('show'); }
+function closeModal(){ modalWrap.classList.remove('show'); }
+modalWrap.addEventListener('click', e => { if(e.target === modalWrap) closeModal(); });
 
-/* ---------- Floating AI Chatbot Script ---------- */
-const chatWidgetBtn = document.getElementById('chatWidgetBtn');
-const chatBox = document.getElementById('chatBox');
-const chatCloseBtn = document.getElementById('chatCloseBtn');
-const chatForm = document.getElementById('chatForm');
-const chatInput = document.getElementById('chatInput');
-const chatBody = document.getElementById('chatBody');
+function checkoutHtml(){
+  const lines = cartLines();
+  return `
+  <button class="close" data-close aria-label="Tutup">✕</button>
+  <h3 class="serif">Checkout</h3>
+  <p class="lead">Isi data pengiriman. Pesananmu akan dikirim ke WhatsApp kami untuk konfirmasi.</p>
+  <form id="coForm" novalidate>
+    <div class="field" id="f-name"><label for="in-name">Nama penerima</label><input id="in-name" autocomplete="name" placeholder="Nama lengkap"><div class="err">Nama wajib diisi.</div></div>
+    <div class="field" id="f-phone"><label for="in-phone">No. WhatsApp</label><input id="in-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx"><div class="err">Masukkan nomor WhatsApp yang valid.</div></div>
+    <div class="two">
+      <div class="field" id="f-area"><label for="in-area">Wilayah</label>
+        <select id="in-area"><option value="">Pilih wilayah…</option>
+          <optgroup label="Kota Medan">${MEDAN_AREAS.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('')}</optgroup>
+          <optgroup label="Lainnya"><option value="Luar Medan">Luar Medan (kota lain)</option></optgroup>
+        </select><div class="err">Pilih wilayah.</div></div>
+      <div class="field" id="f-city" style="display:none"><label for="in-city">Kota / Kabupaten</label><input id="in-city" placeholder="Mis. Binjai, Jakarta"><div class="err">Kota wajib diisi.</div></div>
+    </div>
+    <div class="field" id="f-addr"><label for="in-addr">Alamat lengkap</label><textarea id="in-addr" autocomplete="street-address" placeholder="Jalan, nomor rumah, patokan, kode pos"></textarea><div class="err">Alamat wajib diisi.</div></div>
+    <span class="fl">Pengiriman</span>
+    <div class="opts" id="shipOpts"></div>
+    <span class="fl">Pembayaran</span>
+    <div class="opts" id="payOpts"></div>
+    <div class="field"><label for="in-note">Catatan (opsional)</label><textarea id="in-note" placeholder="Warna, permintaan khusus, dll."></textarea></div>
+    <div class="sum">
+      ${lines.map(l => `<div><span>${esc(l.p.name)} · ${esc(l.size)} × ${l.qty}</span><span>${rupiah(l.p.price*l.qty)}</span></div>`).join('')}
+      <div class="tot"><span>Subtotal</span><span>${rupiah(cartTotal())}</span></div>
+      <div><span style="color:var(--muted)">Ongkir</span><span style="color:var(--muted)">via WhatsApp</span></div>
+    </div>
+    <button type="submit" class="btn solid full">Konfirmasi pesanan</button>
+  </form>`;
+}
+function setupCheckout(){
+  const ships = [
+    {v:'Kurir instan (Medan)', t:'Kurir instan', d:'Khusus dalam kota Medan, tiba di hari yang sama.', medanOnly:true},
+    {v:'Ekspedisi reguler', t:'Ekspedisi reguler', d:'Ke seluruh Indonesia, 2–6 hari kerja.'},
+    {v:'Ambil di toko', t:'Ambil di toko', d:'Ambil langsung di toko Medan.', medanOnly:true}
+  ];
+  const pays = [
+    {v:'Transfer bank', t:'Transfer bank', d:'Detail rekening dikirim lewat WhatsApp.'},
+    {v:'COD', t:'COD', d:'Bayar di tempat, khusus area Medan.', medanOnly:true}
+  ];
+  const draw = () => {
+    const area = $('#in-area').value, isMedan = area && area !== 'Luar Medan';
+    $('#f-city').style.display = area === 'Luar Medan' ? '' : 'none';
+    const mk = (arr, name) => {
+      const ok = arr.filter(o => !o.medanOnly || isMedan || !area);
+      const cur = document.querySelector(`input[name=${name}]:checked`)?.value;
+      return ok.map((o,i) => `<label class="opt"><input type="radio" name="${name}" value="${esc(o.v)}" ${(cur ? cur===o.v : i===0)?'checked':''}><div><b>${esc(o.t)}</b><span>${esc(o.d)}</span></div></label>`).join('');
+    };
+    $('#shipOpts').innerHTML = mk(ships,'ship');
+    $('#payOpts').innerHTML = mk(pays,'pay');
+  };
+  draw();
+  $('#in-area').addEventListener('change', draw);
+  $('#coForm').addEventListener('submit', submitOrder);
+}
+function openCheckout(){
+  if(!cartLines().length) return;
+  closeCart(); openModal(checkoutHtml()); setupCheckout();
+}
+modal.addEventListener('click', e => { if(e.target.closest('[data-close]')) closeModal(); });
+$('#checkoutBtn').addEventListener('click', openCheckout);
 
-chatWidgetBtn.addEventListener('click', ()=> chatBox.classList.toggle('show'));
-chatCloseBtn.addEventListener('click', ()=> chatBox.classList.remove('show'));
-
-chatForm.addEventListener('submit', (e)=>{
+function buildWaText(o){
+  const lines = o.items.map((i,n) => `${n+1}. ${i.name} (${i.size}) x${i.qty} = ${rupiah(i.price*i.qty)}`).join('\n');
+  return `Halo BELLAVIE, saya mau pesan:\n\nKode: ${o.code}\n${lines}\n\nSubtotal: ${rupiah(o.total)} (belum termasuk ongkir)\n\nNama: ${o.name}\nWA: ${o.phone}\nWilayah: ${o.area}\nAlamat: ${o.address}\nPengiriman: ${o.shipping}\nPembayaran: ${o.payment}` + (o.note ? `\nCatatan: ${o.note}` : '');
+}
+async function submitOrder(e){
   e.preventDefault();
-  const text = chatInput.value.trim();
-  if(!text) return;
+  const v = id => $('#'+id).value.trim();
+  const areaSel = v('in-area');
+  const checks = [
+    ['f-name', v('in-name').length >= 2],
+    ['f-phone', /^(\+?62|0)8\d{7,12}$/.test(v('in-phone').replace(/[\s-]/g,''))],
+    ['f-area', !!areaSel],
+    ['f-city', areaSel !== 'Luar Medan' || v('in-city').length >= 2],
+    ['f-addr', v('in-addr').length >= 8]
+  ];
+  let ok = true;
+  checks.forEach(([id, valid]) => { $('#'+id).classList.toggle('bad', !valid); if(!valid) ok = false; });
+  if(!ok){ toast('Lengkapi data yang ditandai merah'); return; }
 
-  const userMsg = document.createElement('div');
-  userMsg.className = 'msg-bubble user';
-  userMsg.textContent = text;
-  chatBody.appendChild(userMsg);
-  chatInput.value = '';
-  chatBody.scrollTop = chatBody.scrollHeight;
+  const lines = cartLines();
+  const order = {
+    code: 'BV-' + Date.now().toString(36).slice(-4).toUpperCase() + Math.random().toString(36).slice(2,5).toUpperCase(),
+    name: v('in-name'), phone: v('in-phone'),
+    area: areaSel === 'Luar Medan' ? 'Luar Medan – ' + v('in-city') : areaSel + ', Medan',
+    address: v('in-addr'), note: v('in-note'),
+    shipping: document.querySelector('input[name=ship]:checked')?.value || '-',
+    payment: document.querySelector('input[name=pay]:checked')?.value || '-',
+    items: lines.map(l => ({id:l.id, name:l.p.name, size:l.size, qty:l.qty, price:l.p.price})),
+    total: cartTotal()
+  };
+  const btn = e.submitter; if(btn){ btn.disabled = true; btn.textContent = 'Memproses…'; }
 
-  setTimeout(()=>{
-    let reply = "Terima kasih sudah menghubungi BELLAVIE, Sis! Tim CS kami akan membalas pesan Anda sebentar lagi.";
-    const lower = text.toLowerCase();
+  // simpan ke database (opsional; abaikan jika tabel 'orders' belum dibuat)
+  try{
+    await fetch(sbUrl('orders'), { method:'POST', headers:{...SB_HEADERS, Prefer:'return=minimal'},
+      body: JSON.stringify({code:order.code, name:order.name, phone:order.phone, area:order.area, address:order.address, note:order.note, shipping:order.shipping, payment:order.payment, items:order.items, total:order.total}) });
+  }catch(err){ console.warn('Order tidak tersimpan di database', err); }
 
-    if(lower.includes("size") || lower.includes("ukuran") || lower.includes("bb")){
-      reply = "Untuk ukuran BELLAVIE:\n- Size S: BB 42-48 kg (LD 88cm)\n- Size M: BB 49-56 kg (LD 94cm)\n- Size L: BB 57-65 kg (LD 100cm)\n- Size XL: BB 66-75 kg (LD 108cm)\nBoleh infokan BB & TB Sis agar Aira bantu berikan rekomendasi?";
-    } else if(lower.includes("retur") || lower.includes("tukar")){
-      reply = "BELLAVIE menyediakan garansi tukar size hingga 3 hari setelah barang diterima, dengan syarat video unboxing ya, Sis ✨";
-    } else if(lower.includes("stok") || lower.includes("ready")){
-      reply = "Semua produk pada katalog halaman utama ready stock, Sis. Silakan dipesan sebelum kehabisan!";
-    }
+  const link = waLink(buildWaText(order));
+  openModal(`
+    <button class="close" data-close aria-label="Tutup">✕</button>
+    <div class="done">
+      <div class="ck">✓</div>
+      <h3 class="serif">Satu langkah lagi</h3>
+      <div class="code">${esc(order.code)}</div>
+      <p>Tekan tombol di bawah untuk mengirim pesananmu ke WhatsApp BELLAVIE. Kami akan konfirmasi stok, ongkir, dan pembayaran.</p>
+      <a class="btn lime full" href="${esc(link)}" target="_blank" rel="noopener" id="sendWa">Kirim pesanan via WhatsApp</a>
+      <button class="btn full" style="margin-top:10px" id="finish">Selesai</button>
+    </div>`);
+  $('#sendWa').addEventListener('click', () => { cart = []; renderCart(); });
+  $('#finish').addEventListener('click', () => { cart = []; renderCart(); closeModal(); });
+}
 
-    const botMsg = document.createElement('div');
-    botMsg.className = 'msg-bubble bot';
-    botMsg.innerText = reply;
-    chatBody.appendChild(botMsg);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }, 800);
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){ if(modalWrap.classList.contains('show')) closeModal(); else if(stage.classList.contains('show')) closeStage(); else closeCart(); }
+  if(stage.classList.contains('show') && !modalWrap.classList.contains('show')){
+    if(e.key === 'ArrowLeft') stageGo(-1);
+    if(e.key === 'ArrowRight') stageGo(1);
+  }
 });
 
-/* ---------- Checkout Modal Logic ---------- */
-const modalOverlay = document.getElementById('modalOverlay');
-const modalBox = document.getElementById('modalBox');
-
-function checkoutFormHtml(){
-  return `
-    <button class="icon-btn modal-close" id="modalCloseBtn">✕</button>
-    <h3>Checkout Pesanan</h3>
-    <p class="sub">Lengkapi detail pengiriman Anda untuk menyelesaikan pesanan.</p>
-    <form id="checkoutForm" novalidate>
-      <div class="field" id="f-name">
-        <label>Nama Penerima</label>
-        <input type="text" id="in-name" placeholder="Nama lengkap">
-        <div class="field-error">Nama wajib diisi.</div>
-      </div>
-      <div class="row2">
-        <div class="field" id="f-phone">
-          <label>No. WhatsApp</label>
-          <input type="tel" id="in-phone" placeholder="08xxxxxxxxxx">
-          <div class="field-error">Nomor WA wajib diisi.</div>
-        </div>
-        <div class="field" id="f-city">
-          <label>Kota</label>
-          <input type="text" id="in-city" placeholder="Mis. Jakarta Selatan">
-          <div class="field-error">Kota wajib diisi.</div>
-        </div>
-      </div>
-      <div class="field" id="f-address">
-        <label>Alamat Lengkap</label>
-        <textarea id="in-address" placeholder="Jalan, No. Rumah, Kecamatan, Kode Pos"></textarea>
-        <div class="field-error">Alamat pengiriman wajib diisi.</div>
-      </div>
-      <div class="subtotal-row">
-        <span>Total Tagihan</span>
-        <span class="amt">${rupiah(cartTotal())}</span>
-      </div>
-      <button type="submit" class="checkout-btn">Konfirmasi Pesanan</button>
-    </form>
-  `;
-}
-
-function openCheckout(){
-  if(cart.length === 0) return;
-  modalBox.innerHTML = checkoutFormHtml();
-  modalOverlay.classList.add('show');
-  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-  document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
-}
-function closeModal(){ modalOverlay.classList.remove('show'); }
-
-function handleCheckoutSubmit(e){
-  e.preventDefault();
-  const fields = [
-    {id:'name', el:'in-name'},
-    {id:'phone', el:'in-phone'},
-    {id:'city', el:'in-city'},
-    {id:'address', el:'in-address'},
-  ];
-  let valid = true;
-  fields.forEach(f=>{
-    const wrap = document.getElementById('f-'+f.id);
-    const input = document.getElementById(f.el);
-    if(!input.value.trim()){
-      wrap.classList.add('error');
-      valid = false;
-    } else {
-      wrap.classList.remove('error');
-    }
-  });
-  if(!valid) return;
-
-  const orderCode = 'BV-' + Math.random().toString(36).slice(2,8).toUpperCase();
-  modalBox.innerHTML = `
-    <button class="icon-btn modal-close" onclick="closeModal()">✕</button>
-    <div class="success-view">
-      <div class="check">✓</div>
-      <h3>Pesanan Diterima</h3>
-      <p>Terima kasih telah berbelanja di BELLAVIE!</p>
-      <div class="order-code">${orderCode}</div>
-      <p>Tim kami akan menghubungi WhatsApp Anda untuk konfirmasi pembayaran & pengiriman.</p>
-      <button class="btn btn-solid" onclick="finishOrder()" style="margin-top:20px; width:100%; justify-content:center;">Selesai</button>
-    </div>
-  `;
-}
-
-function finishOrder(){
-  closeModal();
-  closeDrawer();
-  cart = [];
-  renderCart();
-}
-
-checkoutBtn.addEventListener('click', openCheckout);
+renderCart();
+fetchProducts();
 </script>
 </body>
 </html>
